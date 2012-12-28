@@ -1,0 +1,28 @@
+{
+  "name": "cloudflare",
+  "version": "0.0.0",
+  "description": "CloudFlare API client",
+  "main": "index.js",
+  "scripts": {
+    "test": "make test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sheknows/node-cloudflare.git"
+  },
+  "dependencies": {
+    "request": "*"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "should": "*",
+    "github-flavored-markdown": "*",
+    "supertest": "0.0.1"
+  },
+  "keywords": [
+    "cloudflare",
+    "api"
+  ],
+  "author": "Justin Rainbow <justin.rainbow@sheknows.com>",
+  "license": "MIT"
+}
