@@ -4,7 +4,7 @@ var CF_TOKEN = 'abcdeF';
 var CF_EMAIL = 'my@email.tld';
 
 describe('CloudFlare', function () {
-    var client = require('../index').createClient({
+    var client = require('../../index').createClient({
         token: CF_TOKEN,
         email: CF_EMAIL
     });

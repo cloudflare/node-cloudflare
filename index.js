@@ -1,4 +1,5 @@
 var https  = require('https');
+var http   = require('http');
 var url    = require('url');
 var qs     = require('querystring');
 var assert = require('assert');
@@ -24,9 +25,15 @@ function _clone(object) {
 }
 
 
+function validateType(type) {
+    return (/^(A|CNAME|MX|TXT|SPF|AAAA|NS|SRV|LOC)$/).test(type);
+}
+
+
 function CloudFlare(token, email) {
-    this.token = token;
-    this.email = email;
+    this.token    = token;
+    this.email    = email;
+    this.endpoint = endpoint;
 }
 
 CloudFlare.ACTIONS = {
@@ -37,7 +44,43 @@ var proto = CloudFlare.prototype;
 
 proto.listDomains = function (fn) {
     this._request("zone_load_multi", { act: "zone_load_multi" }, function (err, res) {
-        fn(err, res);
+        if (err) {
+            fn(err, res);
+        } else {
+            var records = res.zones,
+                result  = records.objs;
+
+            result.hasMore = function () {
+                return records.has_more;
+            };
+            result.getCount = function () {
+                return records.count;
+            };
+
+            fn(null, result);
+        }
+    });
+};
+
+proto.listDomainRecords = function (domain, fn) {
+    assert.equal(typeof domain, 'string');
+
+    this._request("rec_load_all", { z: domain }, function (err, res) {
+        if (err) {
+            fn(err);
+        } else {
+            var records = res.recs,
+                result  = records.objs;
+
+            result.hasMore = function () {
+                return records.has_more;
+            };
+            result.getCount = function () {
+                return records.count;
+            };
+
+            fn(null, result);
+        }
     });
 };
 
@@ -62,6 +105,17 @@ proto.addRecord = function (domain, options, fn) {
     });
 };
 
+proto.deleteDomainRecord = function (domain, id, fn) {
+    var opts = {
+        z: domain,
+        id: id
+    };
+
+    this._request("rec_delete", opts, function (err, res) {
+        fn(err, res);
+    });
+};
+
 proto.createRequestData = function (action, params) {
     var data =  {
         tkn:   this.token,
@@ -80,7 +134,8 @@ proto.createRequestData = function (action, params) {
 
 
 proto._request = function (action, params, fn) {
-    var uri = url.parse(endpoint);
+    var uri    = url.parse(this.endpoint),
+        client = uri.protocol === 'http:' ? http : https;
 
     uri.method = 'POST';
 
@@ -92,24 +147,24 @@ proto._request = function (action, params, fn) {
         'content-type':   'application/x-www-form-urlencoded; charset=utf-8'
     };
 
-    var req = https.request(uri, function (res) {
-        var data = "";
+    var req = client.request(uri, function (res) {
+        var str = "", data;
 
         res.on('data', function (d) {
-            data += d.toString('utf8');
+            str += d.toString('utf8');
         });
 
         res.on('end', function () {
             try {
-                data = JSON.parse(data);
-
-                if ("success" === data.result) {
-                    fn(null, data.response);
-                } else {
-                    fn(new Error(data.msg), data.response);
-                }
+                data = JSON.parse(str);
             } catch (e) {
-                fn(new Error("Unable to parse response"), data, res);
+                return fn("Unable to parse response", data, res);
+            }
+
+            if ("success" === data.result) {
+                fn(null, data.response);
+            } else {
+                fn(data.msg, data.response);
             }
         });
     });

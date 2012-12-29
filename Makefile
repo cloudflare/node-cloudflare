@@ -3,12 +3,13 @@ REPORTER = dot
 
 check: test
 
-test: test-unit
+test: test-acceptance
 
-test-unit:
+test-acceptance:
 	@NODE_ENV=test ./node_modules/.bin/mocha \
 		--reporter $(REPORTER) \
-		$(MOCHA_OPTS)
+		--bail \
+		test/acceptance/*.js
 
 test-cov: lib-cov
 	@EXPRESS_COV=1 $(MAKE) test REPORTER=html-cov > coverage.html
@@ -23,4 +24,4 @@ clean:
 	rm -f coverage.html
 	rm -fr lib-cov
 
-.PHONY: test test-unit benchmark clean
+.PHONY: test test-acceptance benchmark clean

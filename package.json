@@ -11,13 +11,14 @@
     "url": "https://github.com/sheknows/node-cloudflare.git"
   },
   "dependencies": {
-    "request": "*"
+    "nopt": "~2.0.0"
   },
   "devDependencies": {
     "mocha": "*",
     "should": "*",
     "github-flavored-markdown": "*",
-    "supertest": "0.0.1"
+    "supertest": "0.0.1",
+    "restify": "~1.4.4"
   },
   "keywords": [
     "cloudflare",
