@@ -99,8 +99,6 @@ proto.addRecord = function (domain, options, fn) {
     };
 
     this._request("rec_new", opts, function (err, res) {
-        console.log(res);
-
         fn(err, res);
     });
 };
