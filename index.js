@@ -30,18 +30,29 @@ function validateType(type) {
 }
 
 
+/**
+ * API client for the CloudFlare Client API
+ *
+ * @constructor
+ * @link  http://www.cloudflare.com/docs/client-api.html
+ * @class CloudFlare
+ * @param {String} token API token from the (My Account)[https://www.cloudflare.com/my-account] page
+ * @param {String} email Email address associated with your CloudFlare account
+ */
 function CloudFlare(token, email) {
     this.token    = token;
     this.email    = email;
     this.endpoint = endpoint;
 }
 
-CloudFlare.ACTIONS = {
-    "listDomains":    "zone_load_multi"
-};
-
 var proto = CloudFlare.prototype;
 
+/**
+ * List all the domains for this account
+ *
+ * @method listDomains
+ * @param  {Function} fn
+ */
 proto.listDomains = function (fn) {
     this._request("zone_load_multi", { act: "zone_load_multi" }, function (err, res) {
         if (err) {
@@ -62,6 +73,13 @@ proto.listDomains = function (fn) {
     });
 };
 
+/**
+ * List all records for the specified domain
+ *
+ * @method listDomainRecords
+ * @param  {String}   domain
+ * @param  {Function} fn
+ */
 proto.listDomainRecords = function (domain, fn) {
     assert.equal(typeof domain, 'string');
 
@@ -84,6 +102,14 @@ proto.listDomainRecords = function (domain, fn) {
     });
 };
 
+/**
+ * Add a new record to a domain
+ *
+ * @method addRecord
+ * @param  {String}   domain
+ * @param  {Object}   options
+ * @param  {Function} fn
+ */
 proto.addRecord = function (domain, options, fn) {
     assert.equal(typeof options, 'object');
     assert.equal(typeof options.name, 'string');
@@ -103,6 +129,14 @@ proto.addRecord = function (domain, options, fn) {
     });
 };
 
+/**
+ * Deletes a specific record from a domain
+ *
+ * @method deleteDomainRecord
+ * @param  {String}   domain
+ * @param  {String}   id
+ * @param  {Function} fn
+ */
 proto.deleteDomainRecord = function (domain, id, fn) {
     var opts = {
         z: domain,
@@ -114,6 +148,15 @@ proto.deleteDomainRecord = function (domain, id, fn) {
     });
 };
 
+/**
+ * Creates the request data for the provided action
+ *
+ * @protected
+ * @method createRequestData
+ * @param  {String}  action
+ * @param  {Object}  params
+ * @return {Object}
+ */
 proto.createRequestData = function (action, params) {
     var data =  {
         tkn:   this.token,
