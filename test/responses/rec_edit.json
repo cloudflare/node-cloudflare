@@ -1,0 +1,49 @@
+{
+  "msg": "",
+  "request": {
+    "a": "rec_edit",
+    "act": "rec_edit",
+    "content": "96.126.126.36",
+    "email": "sample@example.com",
+    "id": "23734516",
+    "name": "sub",
+    "service_mode": "1",
+    "tkn": "1296c62233d48a6cf0585b0c1dddc3512e4b2",
+    "ttl": "1",
+    "type": "A",
+    "z": "example.com"
+  },
+  "response": {
+    "rec": {
+      "obj": {
+        "auto_ttl": 1,
+        "content": "96.126.126.36",
+        "display_content": "96.126.126.36",
+        "display_name": "sub",
+        "name": "sub.example.com",
+        "prio": "",
+        "props": {
+          "cf_open": 0,
+          "cloud_on": 1,
+          "expired_ssl": 0,
+          "expiring_ssl": 0,
+          "pending_ssl": 0,
+          "proxiable": 1,
+          "ssl": 1,
+          "vanity_lock": 0
+        },
+        "rec_id": "23734516",
+        "rec_tag": "b3db8b8ad50389eb4abae7522b22852f",
+        "service_mode": "1",
+        "ssl_expires_on": "",
+        "ssl_id": "12805",
+        "ssl_status": "V",
+        "ttl": "1",
+        "ttl_ceil": 86400,
+        "type": "A",
+        "zone_name": "example.com"
+      }
+    }
+  },
+  "result": "success"
+}

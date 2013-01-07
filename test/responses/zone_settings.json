@@ -1,0 +1,41 @@
+{
+  "msg": "",
+  "request": {
+    "a": "zone_settings",
+    "act": "zone_settings",
+    "email": "sample@example.com",
+    "tkn": "8afbe6dea02407989af4dd4c97bb6e25",
+    "z": "example.com"
+  },
+  "response": {
+    "result": {
+      "objs": [
+        {
+          "async": "0",
+          "bic": "1",
+          "cache_lvl": "agg",
+          "chl_ttl": "900",
+          "dev_mode": 1345768790,
+          "exp_ttl": "7200",
+          "fpurge_ts": "1345757991",
+          "hotlink": "1",
+          "img": "171",
+          "ipv46": 3,
+          "lazy": "1",
+          "minify": "0",
+          "ob": 1,
+          "outboundLinks": "disabled",
+          "outlink": "0",
+          "preload": "0",
+          "s404": "1",
+          "sec_lvl": "Medium",
+          "spdy": "1",
+          "ssl": "1",
+          "userSecuritySetting": "Medium",
+          "waf_profile": "high"
+        }
+      ]
+    }
+  },
+  "result": "success"
+}

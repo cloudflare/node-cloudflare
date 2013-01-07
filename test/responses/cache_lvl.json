@@ -1,0 +1,58 @@
+{
+  "msg": "",
+  "response": {
+    "zone": {
+      "obj": {
+        "allow": [
+          "analytics",
+          "threat_control",
+          "cf_apps",
+          "dns_editor",
+          "cf_settings",
+          "page_rules",
+          "zone_deactivate",
+          "zone_dev_mode1"
+        ],
+        "confirm_code": {
+          "zone_deactivate": "f91eb75acb516aa95dabf5fa2b7305ec",
+          "zone_dev_mode1": "84fae8e497487d5dea45a39f00054488"
+        },
+        "display_name": "example.com",
+        "fqdns": "",
+        "host_id": "415",
+        "host_pubname": "SomeHost",
+        "host_website": "http://www.SomeHost.com",
+        "ns_vanity_map": [],
+        "orig_dnshost": "",
+        "orig_ns_names": "",
+        "orig_registrar": "",
+        "props": {
+          "alexa_rank": 0,
+          "dns_anon_partner": 0,
+          "dns_cname": 0,
+          "dns_partner": 1,
+          "expired_pro": 0,
+          "expired_rs_pro": 0,
+          "expired_ssl": 0,
+          "force_interal": 0,
+          "pro": 0,
+          "pro_sub": 0,
+          "reseller_pro": 0,
+          "ssl": 0,
+          "ssl_needed": 0
+        },
+        "step": "4",
+        "user_id": "1",
+        "vtxt": "",
+        "zone_id": "42",
+        "zone_mode": "1",
+        "zone_name": "example.com",
+        "zone_status": "V",
+        "zone_status_class": "status-active",
+        "zone_status_desc": "CloudFlare powered, this website will be accelerated and protected (<a class=\"modal-link-faq muted\" href=\"#\" onClick=\"cloudFlare.faq('en_US', ['CompleteActive']);return false;\">info</a>)",
+        "zone_type": "P"
+      }
+    }
+  },
+  "result": "success"
+}

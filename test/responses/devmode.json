@@ -1,0 +1,58 @@
+{
+  "msg": "",
+  "response": {
+    "expires_on": 1336697110,
+    "zone": {
+      "obj": {
+        "allow": [
+          "analytics",
+          "threat_control",
+          "cf_apps",
+          "dns_editor",
+          "cf_settings",
+          "page_rules",
+          "zone_deactivate",
+          "zone_dev_mode0"
+        ],
+        "confirm_code": {
+          "zone_deactivate": "f91eb75acb516aa95dabf5fa2b7305ec"
+        },
+        "display_name": "example.com",
+        "fqdns": "",
+        "host_id": "415",
+        "host_pubname": "SomeHost",
+        "host_website": "http://www.SomeHost.com",
+        "ns_vanity_map": [],
+        "orig_dnshost": "",
+        "orig_ns_names": "",
+        "orig_registrar": "",
+        "props": {
+          "alexa_rank": 0,
+          "dns_anon_partner": 0,
+          "dns_cname": 0,
+          "dns_partner": 1,
+          "expired_pro": 0,
+          "expired_rs_pro": 0,
+          "expired_ssl": 0,
+          "force_interal": 0,
+          "pro": 0,
+          "pro_sub": 0,
+          "reseller_pro": 0,
+          "ssl": 0,
+          "ssl_needed": 0
+        },
+        "step": "4",
+        "user_id": "1",
+        "vtxt": "",
+        "zone_id": "42",
+        "zone_mode": "1",
+        "zone_name": "example.com",
+        "zone_status": "V",
+        "zone_status_class": "status-dev-mode",
+        "zone_status_desc": "<strong>Development mode</strong> active: CloudFlare's accelerated cache is inactive on this site, so changes to cachable content (like images, CSS, or JavaScript) are visible immediately. Press shift-reload if your changes are not immediate. Development mode will automatically toggle off <strong>3 hours</strong> after initial setup.",
+        "zone_type": "P"
+      }
+    }
+  },
+  "result": "success"
+}

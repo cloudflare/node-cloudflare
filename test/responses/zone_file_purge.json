@@ -1,0 +1,16 @@
+{
+  "msg": "",
+  "request": {
+    "a": "zone_file_purge",
+    "act": "zone_file_purge",
+    "email": "sample@example.com",
+    "tkn": "8afbe6dea02407989af4dd4c97bb6e25",
+    "url": "http://www.example.com/style.css",
+    "z": "example.com"
+  },
+  "response": {
+    "url": "http://www.example.com/style.css",
+    "vtxt_match": ""
+  },
+  "result": "success"
+}

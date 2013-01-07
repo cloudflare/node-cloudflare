@@ -1,0 +1,48 @@
+{
+  "msg": "",
+  "response": {
+    "result": {
+      "count": 1,
+      "has_more": false,
+      "objs": [
+        {
+          "bandwidthServed": {
+            "cloudflare": 78278.706054688,
+            "user": 58909.374023438
+          },
+          "cache_lvl": "agg",
+          "cachedExpryTime": 1335859372000,
+          "cachedServerTime": 1335816172000,
+          "currentServerTime": 1335824051000,
+          "dev_mode": 0,
+          "interval": 20,
+          "ipv46": 5,
+          "ob": 0,
+          "pageLoadTime": "",
+          "pro_zone": false,
+          "requestsServed": {
+            "cloudflare": 4173,
+            "user": 3697
+          },
+          "trafficBreakdown": {
+            "pageviews": {
+              "crawler": 4,
+              "regular": 2640,
+              "threat": 27
+            },
+            "uniques": {
+              "crawler": 4,
+              "regular": 223,
+              "threat": 16
+            }
+          },
+          "userSecuritySetting": "Medium",
+          "zoneCDate": 1307574643000
+        }
+      ],
+      "timeEnd": 1335643372000,
+      "timeZero": 1333051372000
+    }
+  },
+  "result": "success"
+}
