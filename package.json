@@ -13,14 +13,12 @@
   "dependencies": {},
   "devDependencies": {
     "mocha": "*",
-    "should": "*",
-    "supertest": "0.0.1",
-    "restify": "~1.4.4"
+    "should": "*"
   },
   "keywords": [
     "cloudflare",
     "api"
   ],
-  "author": "Justin Rainbow <justin.rainbow@sheknows.com>",
+  "author": "SheKnows.com",
   "license": "MIT"
 }
