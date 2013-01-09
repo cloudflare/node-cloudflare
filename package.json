@@ -13,7 +13,8 @@
   "dependencies": {},
   "devDependencies": {
     "mocha": "*",
-    "should": "*"
+    "should": "*",
+    "restify": "*"
   },
   "keywords": [
     "cloudflare",
