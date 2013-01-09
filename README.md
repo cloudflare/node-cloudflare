@@ -12,6 +12,16 @@ var cloudflare = require('cloudflare').createClient({
 });
 ```
 
+### List all available domains
 
-## Commandline use
+```js
+cloudflare.listDomains(function (err, domains) {
+  if (err) throw err;
+  domains.forEach(function (domain) {
+    var plan   = domain.props.plan,
+        status = domain.zone_status_class.replace('status-', '');
 
+    console.log("Domain: %s, plan: %s, status: %s", domain.display_name, plan, status);
+  });
+});
+```
