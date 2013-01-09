@@ -1,6 +1,6 @@
 {
   "name": "cloudflare",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "CloudFlare API client",
   "main": "lib/cloudflare.js",
   "scripts": {
