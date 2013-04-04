@@ -55,4 +55,19 @@ describe('CloudFlare', function () {
       });
     });
   });
+
+  describe('#addDomainRecord', function () {
+    it('should create a new A record', function (done) {
+      server.expect('rec_new');
+
+      client.addDomainRecord('example.com', { name: 'test', content: '96.126.126.36', type: 'A' }, function (err, res) {
+        assert.equal(err, null);
+
+        res.should.have.property('auto_ttl', 1);
+        res.should.have.property('name', 'test.example.com');
+
+        done();
+      });
+    });
+  })
 });
