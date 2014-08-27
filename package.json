@@ -1,7 +1,7 @@
 {
   "name": "cloudflare",
   "description": "CloudFlare API client",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "author": "SheKnows.com",
   "bugs": "https://github.com/sheknows/node-cloudflare/issues",
   "dependencies": {},
