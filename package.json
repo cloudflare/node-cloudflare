@@ -12,9 +12,9 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "mocha": "*",
-    "should": "*",
-    "restify": "*"
+    "mocha": ">=1.21.4 <2.0.0-0",
+    "should": ">=2.8.2 <3.0.0-0",
+    "restify": ">=4.0.4 <5.0.0-0"
   },
   "keywords": [
     "cloudflare",

@@ -14,7 +14,7 @@ describe('CloudFlare', function () {
     it('should require only the action parameter', function () {
       var data = client.createRequestData('zone_load_multi');
 
-      data.should.be.an.instanceof(Object).and.include({
+      data.should.be.an.instanceof(Object).and.have.properties({
         tkn: CF_TOKEN,
         email: CF_EMAIL,
         a: 'zone_load_multi'
@@ -24,7 +24,7 @@ describe('CloudFlare', function () {
     it('should merge additional parameters', function () {
       var data = client.createRequestData('zone_load_multi', { z: "example.com" });
 
-      data.should.be.an.instanceof(Object).and.include({
+      data.should.be.an.instanceof(Object).and.have.properties({
         tkn: CF_TOKEN,
         email: CF_EMAIL,
         z: "example.com"
