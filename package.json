@@ -1,25 +1,27 @@
 {
   "name": "cloudflare",
-  "version": "0.0.6",
   "description": "CloudFlare API client",
-  "main": "lib/cloudflare.js",
-  "scripts": {
-    "test": "make test"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/sheknows/node-cloudflare.git"
-  },
+  "version": "0.0.6",
+  "author": "SheKnows.com",
+  "bugs": "https://github.com/sheknows/node-cloudflare/issues",
   "dependencies": {},
   "devDependencies": {
     "mocha": ">=1.21.4 <2.0.0-0",
-    "should": ">=2.8.2 <3.0.0-0",
-    "restify": ">=4.0.4 <5.0.0-0"
+    "restify": ">=4.0.4 <5.0.0-0",
+    "should": ">=2.8.2 <3.0.0-0"
   },
+  "homepage": "https://github.com/sheknows/node-cloudflare",
   "keywords": [
     "cloudflare",
     "api"
   ],
-  "author": "SheKnows.com",
-  "license": "MIT"
+  "license": "MIT",
+  "main": "lib/cloudflare.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sheknows/node-cloudflare.git"
+  },
+  "scripts": {
+    "test": "make test"
+  }
 }
