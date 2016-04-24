@@ -1,27 +1,37 @@
 {
   "name": "cloudflare",
   "description": "CloudFlare API client",
-  "version": "0.0.8",
-  "author": "SheKnows.com",
-  "bugs": "https://github.com/sheknows/node-cloudflare/issues",
-  "dependencies": {},
-  "devDependencies": {
-    "mocha": ">=2.2.1 <3.0.0-0",
-    "restify": ">=3.0.0 <4.0.0-0",
-    "should": ">=5.2.0 <6.0.0-0"
+  "author": "Terin Stock <terinjokes@gmail.com>",
+  "version": "1.0.0",
+  "bugs": {
+    "url": "https://github.com/cloudflare/node-cloudflare/issues"
   },
-  "homepage": "https://github.com/sheknows/node-cloudflare",
+  "dependencies": {
+    "es-class": "^2.1.1",
+    "got": "^6.3.0",
+    "verymodel": "^3.5.1"
+  },
+  "devDependencies": {
+    "ava": "^0.14.0",
+    "nock": "^8.0.0",
+    "nyc": "^6.4.0",
+    "xo": "^0.15.0"
+  },
+  "homepage": "https://github.com/cloudflare/node-cloudflare",
   "keywords": [
     "cloudflare",
     "api"
   ],
   "license": "MIT",
-  "main": "lib/cloudflare.js",
+  "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/sheknows/node-cloudflare.git"
+    "url": "git+https://github.com/cloudflare/node-cloudflare.git"
   },
   "scripts": {
-    "test": "make test"
+    "test": "xo && nyc --reporter=lcov -- ava"
+  },
+  "xo": {
+    "space": true
   }
 }
