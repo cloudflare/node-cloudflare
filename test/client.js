@@ -7,7 +7,8 @@ nock.disableNetConnect();
 test.beforeEach(t => {
   t.context.client = new CF({
     key: 'deadbeef',
-    email: 'cloudflare@example.com'
+    email: 'cloudflare@example.com',
+    h2: false
   });
 });
 

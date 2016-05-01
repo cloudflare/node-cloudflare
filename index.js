@@ -6,6 +6,20 @@ var prototypal = require('es-class');
 var pkg = require('./package.json');
 
 var ips = require('./lib/ips');
+var zones = require('./lib/zones');
+
+/**
+ * Stub for paginated responses.
+ *
+ * Can be expanded later allow for getting the next page of results.
+ */
+function PaginatedResponse(result, info) {
+  this.result = result;
+  this.page = info.page;
+  this.perPage = info.per_page;
+  this.count = info.count;
+  this.total = info.total_count;
+}
 
 module.exports = prototypal({
   static: {
@@ -13,7 +27,8 @@ module.exports = prototypal({
     ReadError: got.ReadError,
     ParseError: got.ParseError,
     HTTPError: got.HTTPError,
-    MaxRedirectError: got.MaxRedirectError
+    MaxRedirectError: got.MaxRedirectError,
+    PaginatedResponse: PaginatedResponse
   },
   constructor: function (opts) {
     opts = opts || {};
@@ -37,6 +52,7 @@ module.exports = prototypal({
         timeout: options.timeout || 1E4,
         retries: options.retries,
         method: options.method,
+        query: options.query,
         headers: {
           'user-agent': 'cloudflare/' + pkg.version + ' node/' + process.versions.node,
           'X-Auth-Key': opts.key,
@@ -46,7 +62,13 @@ module.exports = prototypal({
       });
     };
   },
-  readIPs: ips.read
+  _paginateResponse: function (result, info) {
+    return new PaginatedResponse(result, info);
+  },
+  readIPs: ips.read,
+  browseZones: zones.browse,
+  readZone: zones.read
 });
 
 module.exports.IPRanges = ips.IPRanges;
+module.exports.Zone = zones.Zone;
