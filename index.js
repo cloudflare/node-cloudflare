@@ -7,6 +7,7 @@ var pkg = require('./package.json');
 
 var ips = require('./lib/ips');
 var zones = require('./lib/zones');
+var purge = require('./lib/purge');
 
 function canUseH2(opt) {
   return opt !== false && !process.versions.node.match(/^0\.10/);
@@ -72,5 +73,6 @@ module.exports = prototypal({
   },
   readIPs: ips.read,
   browseZones: zones.browse,
-  readZone: zones.read
+  readZone: zones.read,
+  deleteCache: purge.delete
 });
