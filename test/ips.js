@@ -7,7 +7,8 @@ nock.disableNetConnect();
 test('parses /ips response', async t => {
   let cf = new CF({
     key: 'deadbeef',
-    email: 'cloudflare@example.com'
+    email: 'cloudflare@example.com',
+    h2: false
   });
 
   nock('https://api.cloudflare.com')

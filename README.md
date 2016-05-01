@@ -26,6 +26,33 @@ var client = new CFClient({
 });
 ```
 
+### Zones
+
+#### `Zone`
+
+* *API Reference*: [Zone properties](https://api.cloudflare.com/#zone-properties)
+
+A normalized representation of a CloudFlare Zone. Properties that were
+`snake_cased` have been changed to be `camelCased`.
+
+#### `browseZones([query, [options]): Promise<PaginatedResponse<Zone[]>>`
+
+* query: An object to pass filter and sorting parameters to the API
+* options: *see Request Options*
+* *Returns*: A Promise that resolves to a list of `Zone` objects wrapped in a `PaginatedResponse`
+* *API Reference*: [List zones](https://api.cloudflare.com/#zone-list-zones)
+
+Retrives the list of `Zone` objects, optionally filtered and sorted by `query` options.
+
+#### `readZone(z_id, [options]): Promise<Zone>`
+
+* z_id: The string Zone id
+* options: *see Request Options*
+* *Returns*: A Promise that resolves to a `Zone`
+* *API Reference*: [Zone details](https://api.cloudflare.com/#zone-zone-details)
+
+Retrives the `Zone` for the zone identifier `z_id`.
+
 ### CloudFlare IPs
 
 #### `IPRanges`

@@ -6,9 +6,23 @@ var prototypal = require('es-class');
 var pkg = require('./package.json');
 
 var ips = require('./lib/ips');
+var zones = require('./lib/zones');
 
 function canUseH2(opt) {
   return opt !== false && !process.versions.node.match(/^0\.10/);
+}
+
+/**
+ * Stub for paginated responses.
+ *
+ * Can be expanded later allow for getting the next page of results.
+ */
+function PaginatedResponse(result, info) {
+  this.result = result;
+  this.page = info.page;
+  this.perPage = info.per_page;
+  this.count = info.count;
+  this.total = info.total_count;
 }
 
 module.exports = prototypal({
@@ -18,6 +32,8 @@ module.exports = prototypal({
     ParseError: got.ParseError,
     HTTPError: got.HTTPError,
     MaxRedirectError: got.MaxRedirectError,
+    PaginatedResponse: PaginatedResponse,
+    Zone: zones.Zone,
     IPRanges: ips.IPRanges
   },
   constructor: function (opts) {
@@ -41,6 +57,7 @@ module.exports = prototypal({
         timeout: options.timeout || 1E4,
         retries: options.retries,
         method: options.method,
+        query: options.query,
         headers: {
           'user-agent': 'cloudflare/' + pkg.version + ' node/' + process.versions.node,
           'X-Auth-Key': opts.key,
@@ -50,5 +67,10 @@ module.exports = prototypal({
       });
     };
   },
-  readIPs: ips.read
+  _paginateResponse: function (result, info) {
+    return new PaginatedResponse(result, info);
+  },
+  readIPs: ips.read,
+  browseZones: zones.browse,
+  readZone: zones.read
 });
