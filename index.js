@@ -8,6 +8,7 @@ var pkg = require('./package.json');
 var ips = require('./lib/ips');
 var zones = require('./lib/zones');
 var purge = require('./lib/purge');
+var dns = require('./lib/dns');
 
 /**
  * Stub for paginated responses.
@@ -54,10 +55,12 @@ module.exports = prototypal({
         retries: options.retries,
         method: options.method,
         query: options.query,
+        body: options.body,
         headers: {
           'user-agent': 'cloudflare/' + pkg.version + ' node/' + process.versions.node,
           'X-Auth-Key': opts.key,
-          'X-Auth-Email': opts.email
+          'X-Auth-Email': opts.email,
+          'Content-Type': 'application/json'
         },
         agent: spdyAgent
       });
@@ -69,8 +72,14 @@ module.exports = prototypal({
   readIPs: ips.read,
   browseZones: zones.browse,
   readZone: zones.read,
-  deleteCache: purge.delete
+  deleteCache: purge.delete,
+  browseDNS: dns.browse,
+  readDNS: dns.read,
+  editDNS: dns.edit,
+  deleteDNS: dns.delete,
+  addDNS: dns.add
 });
 
 module.exports.IPRanges = ips.IPRanges;
 module.exports.Zone = zones.Zone;
+module.exports.DNSRecord = dns.DNSRecord;
