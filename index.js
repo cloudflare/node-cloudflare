@@ -7,6 +7,7 @@ var pkg = require('./package.json');
 
 var ips = require('./lib/ips');
 var zones = require('./lib/zones');
+var purge = require('./lib/purge');
 
 /**
  * Stub for paginated responses.
@@ -67,7 +68,8 @@ module.exports = prototypal({
   },
   readIPs: ips.read,
   browseZones: zones.browse,
-  readZone: zones.read
+  readZone: zones.read,
+  deleteCache: purge.delete
 });
 
 module.exports.IPRanges = ips.IPRanges;

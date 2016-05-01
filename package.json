@@ -10,7 +10,8 @@
     "es-class": "^2.1.1",
     "got": "^6.3.0",
     "verymodel": "^3.5.1",
-    "spdy": "^3.3.2"
+    "spdy": "^3.3.2",
+    "url-join": "^1.1.0"
   },
   "devDependencies": {
     "ava": "^0.14.0",

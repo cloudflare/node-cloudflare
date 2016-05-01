@@ -54,6 +54,25 @@ Retrives the list of `Zone` objects, optionally filtered and sorted by `query` o
 
 Retrives the `Zone` for the zone identifier `z_id`.
 
+#### `deleteCache(z, query, [options]): Promise<bool>`
+
+* z: `Zone` object or string zone id
+* query: The (required) purge options for the API:
+  * `purge_everything`: Delete all of the zone's content from the CloudFlare
+    cache. **Note**: This may cause an increase in connections to your server
+    after performing this action.
+  * `files`: An array of URLs that should be removed from cache.
+  * `tags`: Removes assets from cache that were served with a Cache-Tag header
+    that matches a string in this array.
+* options: *see Request Options*
+* *Returns*: A Promise that resolves to `true`.
+* *API Reference*:
+  [Purge all files](https://api.cloudflare.com/#zone-purge-all-files) and
+  [Purge individual files by URL and Cache-Tags](https://api.cloudflare.com/#zone-purge-individual-files-by-url-and-cache-tags)
+
+Purges content from CloudFlare's cache. Please note that `query` is required for
+this API call.
+
 ### CloudFlare IPs
 
 #### `IPRanges`
