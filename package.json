@@ -14,6 +14,7 @@
   },
   "devDependencies": {
     "ava": "^0.14.0",
+    "coveralls": "^2.11.9",
     "nock": "^8.0.0",
     "nyc": "^6.4.0",
     "xo": "^0.15.0"
@@ -30,7 +31,8 @@
     "url": "git+https://github.com/cloudflare/node-cloudflare.git"
   },
   "scripts": {
-    "test": "xo && nyc --reporter=lcov -- ava"
+    "test": "xo && nyc --reporter=lcov -- ava",
+    "coverage": "cat ./coverage/lcov.info | coveralls"
   },
   "xo": {
     "space": true
