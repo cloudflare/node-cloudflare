@@ -10,6 +10,7 @@ With this API client, you'll get the following features:
 
 * Promise-based API, allowing for easy async/await usage in harmony JavaScript
   engines, and with JavaScript transpilers.
+* Effortlessly connects over HTTP/2 (Node.js 0.12 and greater)
 * Automatic handling of Gzip/Deflate compression.
 * Expontential backoff and retry in the presence of error.
 
