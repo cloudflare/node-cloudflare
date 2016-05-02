@@ -100,3 +100,37 @@ test('fetch a Zone by id', async t => {
 
   t.true(zone instanceof Zone);
 });
+
+test('delete a Zone by id', async t => {
+  nock('https://api.cloudflare.com')
+    .delete('/client/v4/zones/1')
+    .reply(200, {
+      result: {
+        id: '1'
+      }
+    });
+
+  let zone = await t.context.cf.deleteZone('1');
+
+  t.false(zone instanceof Zone);
+  t.true(zone.id === '1');
+});
+
+test('delete a Zone by Zone', async t => {
+  let z = new Zone({
+    id: '1',
+    name: 'example.com'
+  });
+  nock('https://api.cloudflare.com')
+    .delete('/client/v4/zones/1')
+    .reply(200, {
+      result: {
+        id: '1'
+      }
+    });
+
+  let zone = await t.context.cf.deleteZone(z);
+
+  t.false(zone instanceof Zone);
+  t.true(zone.id === '1');
+});

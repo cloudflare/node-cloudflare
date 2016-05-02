@@ -53,6 +53,15 @@ Retrives the list of `Zone` objects, optionally filtered and sorted by `query` o
 
 Retrives the `Zone` for the zone identifier `z_id`.
 
+#### `deleteZone(z, [options]): Promise<{id: string}>`
+
+* z: `Zone` object or string zone id
+* options: *see Request Options*
+* *Returns*: A Promise that resolves to a tombstone stub
+* *API Reference*: [Delete a zone](https://api.cloudflare.com/#zone-delete-a-zone)
+
+Deletes the `Zone` from CloudFlare. A tombstone stub is returned.
+
 #### `deleteCache(z, query, [options]): Promise<bool>`
 
 * z: `Zone` object or string zone id
