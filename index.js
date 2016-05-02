@@ -1,5 +1,6 @@
 'use strict';
 var url = require('url');
+var spdy = require('spdy');
 var got = require('got');
 var prototypal = require('es-class');
 var pkg = require('./package.json');
@@ -14,7 +15,18 @@ module.exports = prototypal({
     HTTPError: got.HTTPError,
     MaxRedirectError: got.MaxRedirectError
   },
-  constructor: function (auth) {
+  constructor: function (opts) {
+    opts = opts || {};
+
+    var spdyAgent = opts.h2 ? spdy.createAgent({
+      host: 'api.cloudflare.com',
+      port: 443,
+      protocol: ['h2']
+    }).once('error', function (err) {
+      /* istanbul ignore next */
+      this.emit('error', err);
+    }) : undefined;
+
     this._got = function (endpoint, options) {
       options = options || {};
 
@@ -23,12 +35,14 @@ module.exports = prototypal({
       return got(uri, {
         json: true,
         timeout: options.timeout || 1E4,
+        retries: options.retries,
         method: options.method,
         headers: {
           'user-agent': 'cloudflare/' + pkg.version + ' node/' + process.versions.node,
-          'X-Auth-Key': auth.key,
-          'X-Auth-Email': auth.email
-        }
+          'X-Auth-Key': opts.key,
+          'X-Auth-Email': opts.email
+        },
+        agent: spdyAgent
       });
     };
   },
