@@ -6,6 +6,8 @@ node_js:
   - 6
 before_install:
   - npm install -g npm@latest-2
+after_success:
+  - npm run coverage
 branches:
   except:
     - "/^v\\d+\\.\\d+\\.\\d+$/"
