@@ -53,6 +53,15 @@ Retrives the list of `Zone` objects, optionally filtered and sorted by `query` o
 
 Retrives the `Zone` for the zone identifier `z_id`.
 
+#### `editZone(z, [options]): Promise<Zone>`
+
+* z: `Zone` object or string zone id
+* options: *see Request Options*
+* *Returns*: A Promise that resolves to a `Zone`
+* *API Reference*: [Zone edit](https://api.cloudflare.com/#zone-edit-zone-properties)
+
+Edit the `paused`, `vanity_name_servers`, and `plan` attributes on a zone.
+
 #### `deleteZone(z, [options]): Promise<{id: string}>`
 
 * z: `Zone` object or string zone id
