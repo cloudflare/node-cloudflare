@@ -101,6 +101,29 @@ test('fetch a Zone by id', async t => {
   t.true(zone instanceof Zone);
 });
 
+test('edit a Zone', async t => {
+  let z = new Zone({
+    id: '1',
+    name: 'example.com'
+  });
+
+  nock('https://api.cloudflare.com')
+    .patch('/client/v4/zones/1')
+    .reply(200, {
+      result: {
+        id: '1',
+        name: 'example.com',
+        paused: true
+      }
+    });
+
+  z.paused = true;
+  let zone = await t.context.cf.editZone(z);
+
+  t.true(zone instanceof Zone);
+  t.true(zone.paused === true);
+});
+
 test('delete a Zone by id', async t => {
   nock('https://api.cloudflare.com')
     .delete('/client/v4/zones/1')
