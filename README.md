@@ -34,7 +34,21 @@ var client = new CFClient({
 * *API Reference*: [Zone properties](https://api.cloudflare.com/#zone-properties)
 
 A normalized representation of a CloudFlare Zone. Properties that were
-`snake_cased` have been changed to be `camelCased`.
+`snake_cased` have been aliased to `camelCased`. TODO: document all the known
+properties.
+
+#### `Zone.create(properties): Zone`
+
+* properties: The properties to set on the new `Zone` object.
+* *Returns*: A new `Zone` object.
+
+Creates a new `Zone` object with the provided properties. The returned object
+can be used with the below methods that accept a `Zone` object.
+
+#### `Zone.is(z): boolean`
+
+* z: The other object that may, or may not, be a `Zone` object.
+* *Returns*: `true` if the parameter is a `Zone` object, otherwise `false`.
 
 #### `browseZones([query, [options]): Promise<PaginatedResponse<Zone[]>>`
 
@@ -114,7 +128,20 @@ The CloudFlare API client makes it easy to manage DNS records for domains on Clo
 * *API Reference*: [DNS Records for a Zone](https://api.cloudflare.com/#dns-records-for-a-zone-properties)
 
 A normalized representation of a CloudFlare DNS Record type. Properties that
-were `snake_cased` have been changed to be `camelCased`.
+were `snake_cased` have been aliased to be `camelCased`.
+
+#### `DNSRecord.create(properties): DNSRecord`
+
+* properties: The properties to set on the new `DNSRecord` object.
+* *Returns*: A new `DNSRecord` object.
+
+Creates a new `DNSRecord` object with the provided properties. The returned
+object can be used with the below methods that accept a `DNSRecord` object.
+
+#### `DNSRecord.is(rr): boolean`
+
+* rr: The other object that may, or may not, be a `DNSRecord` object.
+* *Returns*: `true` if the parameter is a `DNSRecord` object, otherwise `false`.
 
 #### `browseDNS(z, [query, [options]]): Promise<PaginatedResponse<DNSRecord[]>>`
 
@@ -182,6 +209,11 @@ IPRanges{
     ]
 }
 ```
+
+#### `IPRanges.is(ip): boolean`
+
+* ip: The other object that may, or may not, be an `IPRanges` object.
+* *Returns*: `true` if the parameter is a `IPRanges` object, otherwise `false`.
 
 #### `readIPs(): Promise<IPRanges>`
 
