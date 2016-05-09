@@ -73,6 +73,7 @@ module.exports = prototypal({
   browseZones: zones.browse,
   readZone: zones.read,
   editZone: zones.edit,
+  addZone: zones.add,
   deleteZone: zones.delete,
   deleteCache: purge.delete,
   browseDNS: dns.browse,

@@ -229,3 +229,25 @@ test('edit paused and vanity name servers', async t => {
   t.true(zone.paused);
   t.deepEqual(zone.vanityNameservers, ['ns1.example.com', 'ns2.example.com']);
 });
+
+test('add zone', async t => {
+  let z = Zone.create({
+    name: 'example.com'
+  });
+
+  nock('https://api.cloudflare.com')
+    .post('/client/v4/zones', {
+      name: 'example.com',
+      jump_start: false
+    })
+    .reply(200, {
+      result: {
+        id: '8',
+        name: 'example.com'
+      }
+    });
+
+  let zone = await t.context.cf.addZone(z, false);
+  t.true(Zone.is(zone));
+  t.true(zone.id === '8');
+});

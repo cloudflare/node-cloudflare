@@ -67,6 +67,16 @@ Saves the modifications to the `Zone` object.
 properties at once. This method executes the modifications in series, but if an
 error occurs, there are no guarantees which properties would have been applied.
 
+#### `addZone(z, [jumpstart, [options]]): Promise<Zone>`
+
+* z: `Zone` object
+* jumpstart: `true` to automatically fetch existing DNS records
+  (default). `false` to disable this behavior.
+* options: *see Request Options*
+* *API Reference*: [Create a zone](https://api.cloudflare.com/#zone-create-a-zone)
+
+Add a zone to an account or organization.
+
 #### `deleteZone(z, [options]): Promise<{id: string}>`
 
 * z: `Zone` object or string zone id
