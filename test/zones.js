@@ -134,3 +134,98 @@ test('delete a Zone by Zone', async t => {
   t.false(Zone.is(zone));
   t.true(zone.id === '1');
 });
+
+test('edit paused status', async t => {
+  let z = Zone.create({
+    id: '1',
+    name: 'example.com',
+    paused: false
+  });
+
+  z.paused = true;
+
+  nock('https://api.cloudflare.com')
+    .patch('/client/v4/zones/1', {
+      paused: true
+    })
+    .reply(200, {
+      result: {
+        id: '1',
+        name: 'example.com',
+        paused: true
+      }
+    });
+
+  let zone = await t.context.cf.editZone(z);
+  t.true(Zone.is(zone));
+  t.true(zone.paused);
+});
+
+test('edit vanity name servers', async t => {
+  let z = Zone.create({
+    id: '1',
+    name: 'example.com',
+    vanity_name_servers: ['ns1.example.com']
+  });
+
+  z.vanityNameservers = z.vanityNameservers.concat('ns2.example.com');
+
+  nock('https://api.cloudflare.com')
+    .patch('/client/v4/zones/1', {
+      vanity_name_servers: ['ns1.example.com', 'ns2.example.com']
+    })
+    .reply(200, {
+      result: {
+        id: '1',
+        name: 'example.com',
+        vanity_name_servers: ['ns1.example.com', 'ns2.example.com']
+      }
+    });
+
+  let zone = await t.context.cf.editZone(z);
+  t.true(Zone.is(zone));
+  t.deepEqual(zone.vanityNameservers, ['ns1.example.com', 'ns2.example.com']);
+});
+
+test('edit paused and vanity name servers', async t => {
+  var result = {
+    id: '1',
+    name: 'example.com',
+    vanity_name_servers: ['ns1.example.com'],
+    paused: false
+  };
+
+  let z = Zone.create({
+    id: '1',
+    name: 'example.com',
+    vanity_name_servers: ['ns1.example.com']
+  });
+
+  z.vanityNameservers = z.vanityNameservers.concat('ns2.example.com');
+  z.paused = true;
+
+  nock('https://api.cloudflare.com')
+    .patch('/client/v4/zones/1', {
+      vanity_name_servers: ['ns1.example.com', 'ns2.example.com']
+    })
+    .reply(200, function (uri, requestBody) {
+      result.vanity_name_servers = requestBody.vanity_name_servers;
+      return {
+        result: result
+      };
+    })
+    .patch('/client/v4/zones/1', {
+      paused: true
+    })
+    .reply(200, function (uri, requestBody) {
+      result.paused = requestBody.paused;
+      return {
+        result: result
+      };
+    });
+
+  let zone = await t.context.cf.editZone(z);
+  t.true(Zone.is(zone));
+  t.true(zone.paused);
+  t.deepEqual(zone.vanityNameservers, ['ns1.example.com', 'ns2.example.com']);
+});

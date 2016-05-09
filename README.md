@@ -54,6 +54,19 @@ Retrives the list of `Zone` objects, optionally filtered and sorted by `query` o
 
 Retrives the `Zone` for the zone identifier `z_id`.
 
+#### `editZone(z, [options]): Promise<Zone>`
+
+* z: `Zone` object
+* options: *see Request Options*
+* *Returns*: A Promise that resolves to a `Zone`.
+* *API Reference*: [Edit Zone Properties](https://api.cloudflare.com/#zone-edit-zone-properties)
+
+Saves the modifications to the `Zone` object.
+
+**Note**: The CloudFlare API currently doesn't support patching multiple
+properties at once. This method executes the modifications in series, but if an
+error occurs, there are no guarantees which properties would have been applied.
+
 #### `deleteZone(z, [options]): Promise<{id: string}>`
 
 * z: `Zone` object or string zone id

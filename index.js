@@ -72,6 +72,7 @@ module.exports = prototypal({
   readIPs: ips.read,
   browseZones: zones.browse,
   readZone: zones.read,
+  editZone: zones.edit,
   deleteZone: zones.delete,
   deleteCache: purge.delete,
   browseDNS: dns.browse,
