@@ -2,7 +2,7 @@
   "name": "cloudflare",
   "description": "CloudFlare API client",
   "author": "Terin Stock <terinjokes@gmail.com>",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "bugs": {
     "url": "https://github.com/cloudflare/node-cloudflare/issues"
   },
