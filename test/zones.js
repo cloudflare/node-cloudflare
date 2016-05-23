@@ -251,3 +251,47 @@ test('add zone', async t => {
   t.true(Zone.is(zone));
   t.true(zone.id === '8');
 });
+
+test('zone with embedded owners doesn\'t error', async t => {
+  nock('https://api.cloudflare.com')
+    .get('/client/v4/zones')
+    .reply(200, {
+      result: [{
+        id: '1',
+        name: 'example.com',
+        created_on: '2014-01-01T05:20:00.12345Z',
+        modified_on: '2015-06-21T01:34:00.0000Z',
+        owner: {
+          id: 'cf',
+          email: 'cloudflare@example.com',
+          name: 'CloudFlare',
+          owner_type: 'user'
+        }
+      }, {
+        id: '2',
+        name: 'cloudflare.com'
+      }],
+      result_info: {
+        page: 1,
+        per_page: 20,
+        count: 2,
+        total_count: 2
+      }
+    });
+
+  let response = await t.context.cf.browseZones();
+  t.true(response instanceof PaginatedResponse);
+
+  let zones = response.result;
+
+  t.true(zones.length === 2);
+  t.true(Zone.is(zones[0]));
+  t.true(Zone.is(zones[1]));
+
+  t.true(zones[0].id === '1');
+  t.true(zones[0].name === 'example.com');
+  t.true(zones[0].createdOn instanceof Date);
+  t.true(zones[0].modifiedOn instanceof Date);
+  t.true(zones[0].owner.id === 'cf');
+  t.true(zones[0].owner.email === 'cloudflare@example.com');
+});
