@@ -167,8 +167,7 @@ test('add DNS Record', async t => {
       type: 'AAAA',
       name: 'example.com',
       ttl: 120,
-      content: '2001:4860:4860::8888',
-      zone_id: '1'
+      content: '2001:4860:4860::8888'
     })
     .reply(200, {
       result: {
@@ -179,6 +178,21 @@ test('add DNS Record', async t => {
         content: '2001:4860:4860::8888',
         zone_id: '1'
       }
+    })
+    .post('/client/v4/zones/1/dns_records', {
+      id: '',
+      type: 'AAAA',
+      name: 'example.com',
+      ttl: 120,
+      content: '2001:4860:4860::8888'
+    })
+    .reply(400, {
+      success: false,
+      errors: [{
+        code: 1004,
+        message: 'DNS Validation Error'
+      }],
+      result: null
     });
 
   let record = await t.context.cf.addDNS(rr);
