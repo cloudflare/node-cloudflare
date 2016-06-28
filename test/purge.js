@@ -14,8 +14,9 @@ test.beforeEach(t => {
 
 test('purge everything by id', async t => {
   nock('https://api.cloudflare.com')
-    .delete('/client/v4/zones/1/purge_cache')
-    .query({purge_everything: 'true'}) // eslint-disable-line camelcase
+    .delete('/client/v4/zones/1/purge_cache', {
+      purge_everything: true // eslint-disable-line camelcase
+    })
     .reply(200, {
       success: true
     });
@@ -28,8 +29,9 @@ test('purge everything by id', async t => {
 test('purge everything by Zone', async t => {
   const z = Zone.create({id: 1});
   nock('https://api.cloudflare.com')
-    .delete('/client/v4/zones/1/purge_cache')
-    .query({purge_everything: 'true'}) // eslint-disable-line camelcase
+    .delete('/client/v4/zones/1/purge_cache', {
+      purge_everything: true // eslint-disable-line camelcase
+    })
     .reply(200, {
       success: true
     });
@@ -41,8 +43,11 @@ test('purge everything by Zone', async t => {
 
 test('purge URL by id', async t => {
   nock('https://api.cloudflare.com')
-    .delete('/client/v4/zones/1/purge_cache')
-    .query({files: 'https://example.com/purge_url'}) // eslint-disable-line camelcase
+    .delete('/client/v4/zones/1/purge_cache', {
+      files: [
+        'https://example.com/purge_url'
+      ]
+    })
     .reply(200, {
       success: true
     });
@@ -57,8 +62,11 @@ test('purge URL by id', async t => {
 test('purge URL by Zone', async t => {
   const z = Zone.create({id: 1});
   nock('https://api.cloudflare.com')
-    .delete('/client/v4/zones/1/purge_cache')
-    .query({files: 'https://example.com/purge_url'}) // eslint-disable-line camelcase
+    .delete('/client/v4/zones/1/purge_cache', {
+      files: [
+        'https://example.com/purge_url'
+      ]
+    })
     .reply(200, {
       success: true
     });
