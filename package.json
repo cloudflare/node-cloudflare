@@ -15,7 +15,7 @@
     "verymodel": "git+https://github.com/terinjokes/VeryModel.git#old_data"
   },
   "devDependencies": {
-    "ava": "^0.15.2",
+    "ava": "^0.16.0",
     "coveralls": "^2.11.9",
     "nock": "^8.0.0",
     "nyc": "^7.0.0",
