@@ -50,7 +50,7 @@ can be used with the below methods that accept a `Zone` object.
 * z: The other object that may, or may not, be a `Zone` object.
 * *Returns*: `true` if the parameter is a `Zone` object, otherwise `false`.
 
-#### `browseZones([query, [options]): Promise<PaginatedResponse<Zone[]>>`
+#### `browseZones([query, [options]]): Promise<PaginatedResponse<Zone[]>>`
 
 * query: An object to pass filter and sorting parameters to the API
 * options: *see Request Options*
