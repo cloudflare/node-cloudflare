@@ -91,6 +91,13 @@ error occurs, there are no guarantees which properties would have been applied.
 
 Add a zone to an account or organization.
 
+#### `checkZoneActivation(z): Promise<{id: string}>`
+
+* z: `Zone` object
+* *API Reference*: [Initiate another zone activation check](https://api.cloudflare.com/#zone-initiate-another-zone-activation-check)
+
+Initiate another zone activation check.
+
 #### `deleteZone(z, [options]): Promise<{id: string}>`
 
 * z: `Zone` object or string zone id
