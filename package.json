@@ -6,19 +6,22 @@
     "url": "https://github.com/cloudflare/node-cloudflare/issues"
   },
   "dependencies": {
+    "autocreate": "^1.1.0",
     "es-class": "^2.1.1",
     "got": "^6.3.0",
-    "lodash": "^4.13.1",
+    "object-assign": "^4.1.0",
     "spdy": "^3.3.2",
     "url-join": "^1.1.0",
-    "verymodel": "^3.6.0"
+    "url-pattern": "^1.0.3"
   },
   "devDependencies": {
-    "ava": "^0.17.0",
     "coveralls": "^2.11.9",
-    "nock": "^9.0.2",
+    "intelli-espower-loader": "^1.0.1",
+    "mocha": "^3.1.2",
     "nyc": "^10.0.0",
+    "power-assert": "^1.4.2",
     "semantic-release": "^6.3.2",
+    "testdouble": "^1.9.0",
     "xo": "^0.17.1"
   },
   "homepage": "https://github.com/cloudflare/node-cloudflare",
@@ -33,7 +36,7 @@
     "url": "git+https://github.com/cloudflare/node-cloudflare.git"
   },
   "scripts": {
-    "test": "xo && nyc --reporter=lcov -- ava",
+    "test": "xo && nyc --reporter=lcov --reporter=text-summary mocha --require intelli-espower-loader --recursive test",
     "coverage": "cat ./coverage/lcov.info | coveralls",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
@@ -43,6 +46,12 @@
     "test"
   ],
   "xo": {
-    "space": true
+    "space": true,
+    "rules": {
+      "unicorn/filename-case": 0
+    }
+  },
+  "publishConfig": {
+    "tag": "next"
   }
 }
