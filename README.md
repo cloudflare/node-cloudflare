@@ -161,7 +161,7 @@ Retrives the listing of `DNSRecord` objects for a `Zone` (or zone id).
 * *Returns*: A Promise that resolves to a `DNSRecord`
 * *API Reference*: [DNS record details](https://api.cloudflare.com/#dns-records-for-a-zone-dns-record-details)
 
-Retrive the `DNSRecord` for a identifier `did` from `Zone` (or zone id).
+Retrive the `DNSRecord` for an identifier `did` from `Zone` (or zone id).
 
 #### `editDNS(d, [options]): Promise<DNSRecord>`
 
