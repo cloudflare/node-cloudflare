@@ -263,7 +263,7 @@ test('create MX record without priority - defaults to 0', async t => {
       }
     });
   let record = await t.context.cf.addDNS(rr);
-  t.true(record.priority === 0);
+  t.is(record.priority, 0);
 });
 
 test('create MX record with priority', async t => {
@@ -275,14 +275,14 @@ test('create MX record with priority', async t => {
     priority: 50
   });
   nock('https://api.cloudflare.com')
-    .post('/client/v4/zones/1/dns_records')
-    .reply(200, {
-      result: {
-        id: '12345',
-        type: 'MX',
-        priority: rr.priority
-      }
-    });
+  .post('/client/v4/zones/1/dns_records')
+  .reply(200, {
+    result: {
+      id: '12345',
+      type: 'MX',
+      priority: rr.priority
+    }
+  });
   let record = await t.context.cf.addDNS(rr);
-  t.true(record.priority === 50);
+  t.is(record.priority, 50);
 });
