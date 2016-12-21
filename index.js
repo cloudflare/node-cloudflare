@@ -19,6 +19,7 @@ function PaginatedResponse(result, info) {
   this.result = result;
   this.page = info.page;
   this.perPage = info.per_page;
+  this.totalPages = info.total_pages;
   this.count = info.count;
   this.total = info.total_count;
 }
@@ -74,6 +75,7 @@ module.exports = prototypal({
   readZone: zones.read,
   editZone: zones.edit,
   addZone: zones.add,
+  checkZoneActivation: zones.activationCheck,
   deleteZone: zones.delete,
   deleteCache: purge.delete,
   browseDNS: dns.browse,
