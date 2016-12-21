@@ -224,3 +224,65 @@ test('delete DNS Record', async t => {
   t.false(DNSRecord.is(record));
   t.true(record.id === '80808');
 });
+
+test('create SRV record', async t => {
+  const rr = DNSRecord.create({
+    zone_id: '1',
+    type: 'SRV',
+    data: {
+      name: 'a'
+    }
+  });
+  nock('https://api.cloudflare.com')
+    .post('/client/v4/zones/1/dns_records')
+    .reply(200, {
+      result: {
+        id: '12345',
+        type: 'SRV',
+        data: rr.data
+      }
+    });
+  let record = await t.context.cf.addDNS(rr);
+  t.true(record.data.name === 'a');
+});
+
+test('create MX record without priority - defaults to 0', async t => {
+  const rr = DNSRecord.create({
+    zone_id: '1',
+    type: 'MX',
+    name: 'something.com',
+    ttl: 100
+  });
+  nock('https://api.cloudflare.com')
+    .post('/client/v4/zones/1/dns_records')
+    .reply(200, {
+      result: {
+        id: '12345',
+        type: 'MX',
+        priority: rr.priority
+      }
+    });
+  let record = await t.context.cf.addDNS(rr);
+  t.is(record.priority, 0);
+});
+
+test('create MX record with priority', async t => {
+  const rr = DNSRecord.create({
+    zone_id: '1',
+    type: 'MX',
+    name: 'something.com',
+    ttl: 100,
+    priority: 50
+  });
+  nock('https://api.cloudflare.com')
+  .post('/client/v4/zones/1/dns_records')
+  .reply(200, {
+    result: {
+      id: '12345',
+      type: 'MX',
+      priority: rr.priority
+    }
+  });
+  let record = await t.context.cf.addDNS(rr);
+  t.is(record.priority, 50);
+});
