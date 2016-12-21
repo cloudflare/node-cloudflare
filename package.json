@@ -15,12 +15,12 @@
     "verymodel": "^3.6.0"
   },
   "devDependencies": {
-    "ava": "^0.16.0",
+    "ava": "^0.17.0",
     "coveralls": "^2.11.9",
-    "nock": "^8.0.0",
-    "nyc": "^8.0.0",
-    "semantic-release": "^4.3.5",
-    "xo": "^0.16.0"
+    "nock": "^9.0.2",
+    "nyc": "^10.0.0",
+    "semantic-release": "^6.3.2",
+    "xo": "^0.17.1"
   },
   "homepage": "https://github.com/cloudflare/node-cloudflare",
   "keywords": [
