@@ -44,5 +44,8 @@
   ],
   "xo": {
     "space": true
+  },
+  "release": {
+    "branch": "1.x"
   }
 }
