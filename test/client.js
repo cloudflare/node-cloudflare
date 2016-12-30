@@ -1,6 +1,6 @@
 import test from 'ava';
 import nock from 'nock';
-import CF, {HTTPError, RequestError, ParseError} from '../';
+import CF, {HTTPError, ParseError} from '../';
 
 nock.disableNetConnect();
 
@@ -47,20 +47,6 @@ test('rejects on non-200', async t => {
     });
 
   await t.throws(t.context.client._got('status/500'), HTTPError, 'Response code 500 (Internal Server Error)');
-});
-
-test('rejects on socket timeout', async t => {
-  nock('https://api.cloudflare.com')
-    .get('/client/v4/status/500')
-    .socketDelay(2)
-    .reply(500, {
-      error: 'Internal Server Error'
-    });
-
-  await t.throws(t.context.client._got('status/500', {
-    timeout: 1,
-    retries: 0
-  }), RequestError);
 });
 
 test('rejects if JSON parse error', async t => {
