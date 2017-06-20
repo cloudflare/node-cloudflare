@@ -1,5 +1,6 @@
 {
   "name": "cloudflare",
+  "version": "2.1.0",
   "description": "CloudFlare API client",
   "author": "Terin Stock <terinjokes@gmail.com>",
   "bugs": {
@@ -20,7 +21,6 @@
     "mocha": "^3.4.2",
     "nyc": "^10.3.2",
     "power-assert": "^1.4.4",
-    "semantic-release": "^6.3.6",
     "testdouble": "^3.1.1",
     "xo": "^0.17.1"
   },
@@ -36,9 +36,9 @@
     "url": "git+https://github.com/cloudflare/node-cloudflare.git"
   },
   "scripts": {
-    "test": "xo && nyc --reporter=lcov --reporter=text-summary mocha --require intelli-espower-loader --recursive test",
-    "coverage": "cat ./coverage/lcov.info | coveralls",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+    "lint": "xo",
+    "test": "nyc --reporter=lcov --reporter=text-summary mocha --require intelli-espower-loader --recursive test",
+    "coverage": "cat ./coverage/lcov.info | coveralls"
   },
   "files": [
     "index.js",

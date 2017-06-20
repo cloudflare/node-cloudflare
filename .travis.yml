@@ -1,16 +1,39 @@
 language: node_js
+dist: trusty
 sudo: false
-node_js:
-  - 4
-  - 5
-  - 6
+
 before_install:
-  - npm install -g npm@latest-2
-after_success:
-  - npm run coverage
-  - npm run semantic-release
-branches:
-  except:
-    - "/^v\\d+\\.\\d+\\.\\d+$/"
+  - npm install -g npm@latest
 notifications:
   email: false
+
+test_stage: &test_stage
+  after_success:
+    - npm run coverage
+
+jobs:
+  include:
+    - stage: lint
+      node_js: 8
+      script:
+        - npm run lint
+    - stage: test
+      <<: *test_stage
+      node_js: 4
+    - stage: test
+      <<: *test_stage
+      node_js: 6
+    - stage: test
+      <<: *test_stage
+      node_js: 8
+    - stage: release
+      node_js: 8
+      script: skip
+      deploy:
+        - provider: npm
+          email: terinjokes@gmail.com
+          api_key:
+            secure: Y8SHFjYJoPzwxt9MIiP+FkLz8Gy8Qc6HGEJtaVfoeKzGk4dQcT2PHQmiZ0mNHhmueVa96UCClJJBOx0k7J4wl5D/ABB3hh3+YPbnbFaD/uIvVEuYcXgFrzVox9u9M/CzOWVHUinRe+m7HSsEn6LPgwPb5EWQo0eGzRMGKooe5n7X1JDjFrSL0ERGAY4zTxl5iwKUQvfaYjOqJ1YUkhjqu01d4FHMXHaxgjJE5CpduvTHjQisMiSQIrNmiKWuHKNgkRDGWJnClpatfWUXOnFUFEMY5yGQ5RZkOesZ5JqSSAj7JgRNH7M0gMF3um6k+h2xM1w4W6XcAoF0FnBuh6X91fKR+F83VMA/skdmf4z/OtL2KbZsuIYiSTbsPyNb9ysChhicICD8fjZ20Z/nXXTgpf5X2lXSPY6gysdJ2V4Y1e5VEq4yaLFH/HV/mZPcjpfCFnGbAx9Urg51pB0dAzhPG6ZfkKATDnhnQJhvE5WFgeRNC5AS+oV6xoAqRwtTw0rSsfHfZGVjuQkH+TXuqdIB5JqrHRt00BYO/YbMJwMmtJMOdPzQkmUAT1R136c8Rfi3UjD/70Lpnp5DuYEu4H+gApjJDSbIsYNJAPmzdumniHi1KKpmbV1EUC4mfNA1tcvUX8Sc9MRP6aaRspQN9B7PxR1936iC9bQEN5HgIgmr2qg=
+          skip_cleanup: true
+          on:
+            tags: true
