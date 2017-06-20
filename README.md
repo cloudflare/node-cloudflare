@@ -70,4 +70,6 @@ async function getZoneStatus(id) {
     * `del(zoneId)`
     * `activationCheck(zoneId)`
     * `purgeCache(zoneId, params)`
-
+* user
+    * `read()`
+    * `edit(params)`

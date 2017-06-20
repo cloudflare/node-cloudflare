@@ -7,7 +7,8 @@ var Client = require('./lib/Client');
 var resources = {
   dnsRecords: require('./lib/resources/DNSRecords'),
   ips: require('./lib/resources/IPs'),
-  zones: require('./lib/resources/Zones')
+  zones: require('./lib/resources/Zones'),
+  user: require('./lib/resources/User')
 };
 
 var Cloudflare = auto(prototypal({
