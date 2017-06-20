@@ -13,9 +13,9 @@ var Resource = require('../lib/Resource');
 var Client = require('../lib/Client');
 
 describe('Resource', function () {
-  var client;
+  var FakeClient;
   beforeEach(function () {
-    client = td.object(Client);
+    FakeClient = td.constructor(Client);
   });
 
   afterEach(function () {
@@ -23,6 +23,7 @@ describe('Resource', function () {
   });
 
   it('creates an instance of a Resource', function () {
+    var client = new FakeClient();
     var subject = new Resource(client);
 
     assert(subject instanceof Resource);
@@ -31,6 +32,7 @@ describe('Resource', function () {
 
   describe('createFullPath', function () {
     it('returns root when unconfigured', function () {
+      var client = new FakeClient();
       var subject = new Resource(client);
 
       var path = subject.createFullPath();
@@ -39,6 +41,7 @@ describe('Resource', function () {
     });
 
     it('joins method path with resource path', function () {
+      var client = new FakeClient();
       var subject = new Resource(client);
       subject.path = 'example';
 
@@ -53,6 +56,7 @@ describe('Resource', function () {
       var Klass = prototypal({
         extends: Resource
       });
+      var client = new FakeClient();
       var subject = new Klass(client);
 
       assert(subject instanceof Resource);
@@ -65,6 +69,7 @@ describe('Resource', function () {
         extends: Resource,
         path: 'example'
       });
+      var client = new FakeClient();
       var subject = new Klass(client);
 
       var path = subject.createFullPath('foo');
@@ -80,6 +85,7 @@ describe('Resource', function () {
           'del'
         ]
       });
+      var client = new FakeClient();
       var subject = new Klass(client);
 
       assert(Object.hasOwnProperty.call(subject, 'browse'));

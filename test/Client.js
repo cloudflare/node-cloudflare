@@ -9,11 +9,11 @@ var beforeEach = mocha.beforeEach;
 var afterEach = mocha.afterEach;
 
 describe('HTTP Client', function () {
-  var getter;
+  var FakeGetter;
   var Client;
 
   beforeEach(function () {
-    getter = td.replace('../lib/Getter');
+    FakeGetter = td.replace('../lib/Getter');
     Client = require('../lib/Client');
   });
 
@@ -22,6 +22,7 @@ describe('HTTP Client', function () {
   });
 
   it('should convert data into query parameters in GET requests', function () {
+    var getter = new FakeGetter();
     var email = 'fake@domain.email';
     var key = 'DEADBEEF';
     var body = {
@@ -66,6 +67,7 @@ describe('HTTP Client', function () {
   });
 
   it('should pass data as body for non-GET requests', function () {
+    var getter = new FakeGetter();
     var body = {
       hello: 'world'
     };
@@ -102,6 +104,7 @@ describe('HTTP Client', function () {
   });
 
   it('should support User Service Auth keys', function () {
+    var getter = new FakeGetter();
     var email = 'fake@domain.email';
     var key = 'v1.0-DEADBEEF';
     var body = {
@@ -145,6 +148,7 @@ describe('HTTP Client', function () {
   });
 
   it('should override authentication', function () {
+    var getter = new FakeGetter();
     var body = {
       hello: 'world'
     };

@@ -13,13 +13,11 @@ var Client = require('../lib/Client');
 var method = require('../lib/method');
 
 describe('method', function () {
-  var resource;
-  var client;
+  var FakeResource;
+  var FakeClient;
   beforeEach(function () {
-    client = td.object(Client);
-    resource = td.object(Resource);
-
-    resource._client = client;
+    FakeClient = td.constructor(Client);
+    FakeResource = td.constructor(Resource);
   });
   afterEach(function () {
     td.reset();
@@ -29,6 +27,10 @@ describe('method', function () {
     var body = {
       hello: 'world'
     };
+
+    var client = new FakeClient();
+    var resource = new FakeResource();
+    resource._client = client;
 
     td.when(resource.createFullPath(undefined)).thenReturn('/');
     td.when(client.request(), {ignoreExtraArgs: true}).thenReject();
@@ -48,6 +50,11 @@ describe('method', function () {
     var body = {
       hello: 'world'
     };
+
+    var client = new FakeClient();
+    var resource = new FakeResource();
+    resource._client = client;
+
     td.when(resource.createFullPath('/:id')).thenReturn('example/:id');
     td.when(client.request(), {ignoreExtraArgs: true}).thenReject();
     td.when(client.request('POST', 'example/42', {}, {
@@ -66,6 +73,10 @@ describe('method', function () {
   });
 
   it('should reject when URL parameters are not provided', function () {
+    var client = new FakeClient();
+    var resource = new FakeResource();
+    resource._client = client;
+
     td.when(resource.createFullPath('/:id')).thenReturn('example/:id');
     td.when(client.request(), {ignoreExtraArgs: true}).thenReject();
 
@@ -83,6 +94,10 @@ describe('method', function () {
     var body = {
       hello: 'world'
     };
+    var client = new FakeClient();
+    var resource = new FakeResource();
+    resource._client = client;
+
     td.when(resource.createFullPath('/:id')).thenReturn('example/:id');
     td.when(client.request(), {ignoreExtraArgs: true}).thenReject();
     td.when(client.request('POST', 'example/42', {
@@ -108,6 +123,11 @@ describe('method', function () {
     var body = {
       hello: 'world'
     };
+
+    var client = new FakeClient();
+    var resource = new FakeResource();
+    resource._client = client;
+
     td.when(resource.createFullPath(undefined)).thenReturn('/');
     td.when(client.request(), {ignoreExtraArgs: true}).thenReject();
     td.when(client.request('GET', '/', {}, {
@@ -132,6 +152,11 @@ describe('method', function () {
     var body = {
       hello: 'world'
     };
+
+    var client = new FakeClient();
+    var resource = new FakeResource();
+    resource._client = client;
+
     td.when(resource.createFullPath('/:id')).thenReturn('example/:id');
     td.when(client.request(), {ignoreExtraArgs: true}).thenReject();
     td.when(client.request('POST', 'example/42', {
