@@ -9,7 +9,6 @@ With these bindings, you'll get the following features:
 
 * A Promise-based API. With modern versions of Node.js, this can be
   leveraged for async/await and generator support.
-* Effortless connections over HTTP/2.
 * Automatic handling of Gzip/Deflate compression.
 
 Node.js v4 and greater are supported.

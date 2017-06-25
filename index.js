@@ -15,8 +15,7 @@ var Cloudflare = auto(prototypal({
   constructor: function (auth) {
     var client = new Client({
       email: auth && auth.email,
-      key: auth && auth.key,
-      h2: true
+      key: auth && auth.key
     });
 
     Object.defineProperty(this, '_client', {
