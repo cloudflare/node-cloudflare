@@ -54,11 +54,11 @@ async function getZoneStatus(id) {
 ### Available resources and methods
 
 * dnsRecords
-    * `browse()`
-    * `read(dnsRecordId)`
-    * `edit(dnsRecordId, params)`
-    * `add(params)`
-    * `del(dnsRecordId)`
+    * `browse(zoneId)`
+    * `read(zoneId, dnsRecordId)`
+    * `edit(zoneId, dnsRecordId, params)`
+    * `add(zoneId, params)`
+    * `del(zoneId, dnsRecordId)`
 * ips
     * `browse()`
 * zones
