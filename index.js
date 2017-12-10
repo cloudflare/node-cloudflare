@@ -9,6 +9,7 @@ var resources = {
   ips: require('./lib/resources/IPs'),
   zones: require('./lib/resources/Zones'),
   zoneSettings: require('./lib/resources/ZoneSettings'),
+  zoneCustomHostNames: require('./lib/resources/ZoneCustomHostNames'),
   user: require('./lib/resources/User')
 };
 
