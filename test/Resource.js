@@ -37,7 +37,7 @@ describe('Resource', function () {
 
       var path = subject.createFullPath();
 
-      assert.equal(path, '/');
+      assert.equal(path, '');
     });
 
     it('joins method path with resource path', function () {
