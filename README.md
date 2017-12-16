@@ -1,9 +1,14 @@
 # Cloudflare Node.js bindings
+[![NPM version][npm-image]][npm-url]
+[![Downloads][download-badge]][npm-url]
 
 [Cloudflare v4 API][cf-api] bindings for Node.js, providing a sourdough
 "BREAD" (Browse, Read, Edit, Add, and Delete) interface.
 
 [cf-api]: https://api.cloudflare.com/
+[npm-url]: https://npmjs.org/package/cloudflare
+[npm-image]: https://img.shields.io/npm/v/cloudflare.svg?style=flat-square
+[download-badge]: http://img.shields.io/npm/dm/cloudflare.svg?style=flat-square
 
 With these bindings, you'll get the following features:
 
