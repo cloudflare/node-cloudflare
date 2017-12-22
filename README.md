@@ -23,7 +23,8 @@ the [My Account][my-account] page in the Cloudflare dashboard.
 ```javascript
 var cf = require('cloudflare')({
   email: 'you@example.com',
-  key: 'your Cloudflare API key'
+  key: 'your Cloudflare API key',
+  gotOptions: {} // options passed to `got`, like a HTTP agent for proxying
 });
 ```
 
