@@ -14,10 +14,11 @@ var resources = {
 };
 
 var Cloudflare = auto(prototypal({
-  constructor: function (auth) {
+  constructor: function (options) {
     var client = new Client({
-      email: auth && auth.email,
-      key: auth && auth.key
+      email: options && options.email,
+      key: options && options.key,
+      gotOptions: options && options.gotOptions
     });
 
     Object.defineProperty(this, '_client', {
