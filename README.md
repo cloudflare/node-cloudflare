@@ -67,6 +67,7 @@ async function getZoneStatus(id) {
     * `edit(zoneId, params)`
     * `add(params)`
     * `del(zoneId)`
+    * `analyticsDashboard(zoneId)`
     * `activationCheck(zoneId)`
     * `purgeCache(zoneId, params)`
 * user
