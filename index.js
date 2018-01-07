@@ -1,17 +1,27 @@
+/*
+ * Copyright (C) 2014-present Cloudflare, Inc.
+
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ */
+
 'use strict';
-var prototypal = require('es-class');
-var auto = require('autocreate');
 
-var Client = require('./lib/Client');
+const prototypal = require('es-class');
+const auto = require('autocreate');
 
-var resources = {
+const Client = require('./lib/Client');
+
+/* eslint-disable global-require */
+const resources = {
   dnsRecords: require('./lib/resources/DNSRecords'),
   ips: require('./lib/resources/IPs'),
   zones: require('./lib/resources/Zones'),
   zoneSettings: require('./lib/resources/ZoneSettings'),
   zoneCustomHostNames: require('./lib/resources/ZoneCustomHostNames'),
-  user: require('./lib/resources/User')
+  user: require('./lib/resources/User'),
 };
+/* eslint-enable global-require */
 
 /**
  * Constructs and returns a new Cloudflare API client with the specified authentication.
@@ -28,29 +38,31 @@ var resources = {
  * @property {ZoneCustomHostNames} zoneCustomHostNames - Zone Custom Host Names instance
  * @property {User} user - User instance
  */
-var Cloudflare = auto(prototypal({
-  constructor: function (auth) {
-    var client = new Client({
-      email: auth && auth.email,
-      key: auth && auth.key
-    });
-
-    Object.defineProperty(this, '_client', {
-      value: client,
-      writable: false,
-      enumerable: false,
-      configurable: false
-    });
-
-    Object.keys(resources).forEach(function (resource) {
-      Object.defineProperty(this, resource, {
-        value: resources[resource](this._client),
-        writable: true,
-        enumerable: false,
-        configurable: true
+const Cloudflare = auto(
+  prototypal({
+    constructor: function constructor(auth) {
+      const client = new Client({
+        email: auth && auth.email,
+        key: auth && auth.key,
       });
-    }, this);
-  }
-}));
+
+      Object.defineProperty(this, '_client', {
+        value: client,
+        writable: false,
+        enumerable: false,
+        configurable: false,
+      });
+
+      Object.keys(resources).forEach(function(resource) {
+        Object.defineProperty(this, resource, {
+          value: resources[resource](this._client), // eslint-disable-line security/detect-object-injection
+          writable: true,
+          enumerable: false,
+          configurable: true,
+        });
+      }, this);
+    },
+  })
+);
 
 module.exports = Cloudflare;

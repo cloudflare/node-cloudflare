@@ -1,192 +1,231 @@
+/*
+ * Copyright (C) 2014-present Cloudflare, Inc.
+
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ */
+
 'use strict';
-var assert = require('power-assert');
-var td = require('testdouble');
-var mocha = require('mocha');
 
-var describe = mocha.describe;
-var it = mocha.it;
-var beforeEach = mocha.beforeEach;
-var afterEach = mocha.afterEach;
+const assert = require('power-assert');
+const td = require('testdouble');
+const mocha = require('mocha');
 
-describe('HTTP Client', function () {
-  var FakeGetter;
-  var Client;
+const describe = mocha.describe;
+const it = mocha.it;
+const beforeEach = mocha.beforeEach;
+const afterEach = mocha.afterEach;
 
-  beforeEach(function () {
+describe('HTTP Client', () => {
+  let FakeGetter;
+  let Client;
+
+  beforeEach(done => {
     FakeGetter = td.replace('../lib/Getter');
-    Client = require('../lib/Client');
+    Client = require('../lib/Client'); // eslint-disable-line global-require
+
+    done();
   });
 
-  afterEach(function () {
+  afterEach(done => {
     td.reset();
+    done();
   });
 
-  it('should convert data into query parameters in GET requests', function () {
-    var getter = new FakeGetter();
-    var email = 'fake@domain.email';
-    var key = 'DEADBEEF';
-    var body = {
-      hello: 'world'
+  it('should convert data into query parameters in GET requests', () => {
+    const getter = new FakeGetter();
+    const email = 'fake@domain.email';
+    const key = 'DEADBEEF';
+    const body = {
+      hello: 'world',
     };
 
-    var options = {
+    const options = {
       json: true,
       method: 'GET',
       headers: {
         'X-Auth-Key': key,
         'X-Auth-Email': email,
         'Content-Type': 'application/json',
-        Accept: 'application/json'
+        Accept: 'application/json',
       },
       query: {
-        name: 'world'
-      }
+        name: 'world',
+      },
     };
 
     td.when(getter.got(), {ignoreExtraArgs: true}).thenReject();
-    td.when(getter.got(
-      'https://api.cloudflare.com/client/v4/example/42',
-      td.matchers.contains(options)
-    )).thenResolve({body: body});
+    td
+      .when(
+        getter.got(
+          'https://api.cloudflare.com/client/v4/example/42',
+          td.matchers.contains(options)
+        )
+      )
+      .thenResolve({body});
 
-    var subject = new Client({
-      email: email,
-      key: key
+    const subject = new Client({
+      email,
+      key,
     });
 
-    var res = subject.request('GET', 'example/42', {
-      name: 'world'
-    }, {
-      auth: {},
-      headers: {}
-    });
+    const res = subject.request(
+      'GET',
+      'example/42',
+      {
+        name: 'world',
+      },
+      {
+        auth: {},
+        headers: {},
+      }
+    );
 
-    return res.then(function (resp) {
-      assert.deepEqual(resp, body);
-    });
+    return res.then(resp => assert.deepEqual(resp, body));
   });
 
-  it('should pass data as body for non-GET requests', function () {
-    var getter = new FakeGetter();
-    var body = {
-      hello: 'world'
+  it('should pass data as body for non-GET requests', () => {
+    const getter = new FakeGetter();
+    const body = {
+      hello: 'world',
     };
-    var options = {
+    const options = {
       json: true,
       timeout: 42,
       retries: 1337,
       method: 'TEST',
       body: JSON.stringify({
-        name: 'world'
-      })
+        name: 'world',
+      }),
     };
 
     td.when(getter.got(), {ignoreExtraArgs: true}).thenReject();
-    td.when(getter.got(
-      'https://api.cloudflare.com/client/v4/example/42',
-      td.matchers.contains(options)
-    )).thenResolve({body: body});
+    td
+      .when(
+        getter.got(
+          'https://api.cloudflare.com/client/v4/example/42',
+          td.matchers.contains(options)
+        )
+      )
+      .thenResolve({body});
 
-    var subject = new Client({});
+    const subject = new Client({});
 
-    var res = subject.request('TEST', 'example/42', {
-      name: 'world'
-    }, {
-      timeout: 42,
-      retries: 1337,
-      auth: {},
-      headers: {}
-    });
+    const res = subject.request(
+      'TEST',
+      'example/42',
+      {
+        name: 'world',
+      },
+      {
+        timeout: 42,
+        retries: 1337,
+        auth: {},
+        headers: {},
+      }
+    );
 
-    return res.then(function (resp) {
-      assert.deepEqual(resp, body);
-    });
+    return res.then(resp => assert.deepEqual(resp, body));
   });
 
-  it('should support User Service Auth keys', function () {
-    var getter = new FakeGetter();
-    var email = 'fake@domain.email';
-    var key = 'v1.0-DEADBEEF';
-    var body = {
-      hello: 'world'
+  it('should support User Service Auth keys', () => {
+    const getter = new FakeGetter();
+    const email = 'fake@domain.email';
+    const key = 'v1.0-DEADBEEF';
+    const body = {
+      hello: 'world',
     };
 
-    var options = {
+    const options = {
       json: true,
       method: 'GET',
       headers: {
         'X-Auth-User-Service-Key': key,
         'Content-Type': 'application/json',
-        Accept: 'application/json'
+        Accept: 'application/json',
       },
       query: {
-        name: 'world'
-      }
+        name: 'world',
+      },
     };
 
     td.when(getter.got(), {ignoreExtraArgs: true}).thenReject();
-    td.when(getter.got(
-      'https://api.cloudflare.com/client/v4/example/42',
-      td.matchers.contains(options)
-    )).thenResolve({body: body});
+    td
+      .when(
+        getter.got(
+          'https://api.cloudflare.com/client/v4/example/42',
+          td.matchers.contains(options)
+        )
+      )
+      .thenResolve({body});
 
-    var subject = new Client({
-      email: email,
-      key: key
+    const subject = new Client({
+      email,
+      key,
     });
 
-    var res = subject.request('GET', 'example/42', {
-      name: 'world'
-    }, {
-      auth: {},
-      headers: {}
-    });
+    const res = subject.request(
+      'GET',
+      'example/42',
+      {
+        name: 'world',
+      },
+      {
+        auth: {},
+        headers: {},
+      }
+    );
 
-    return res.then(function (resp) {
-      assert.deepEqual(resp, body);
-    });
+    return res.then(resp => assert.deepEqual(resp, body));
   });
 
-  it('should override authentication', function () {
-    var getter = new FakeGetter();
-    var body = {
-      hello: 'world'
+  it('should override authentication', () => {
+    const getter = new FakeGetter();
+    const body = {
+      hello: 'world',
     };
-    var options = {
+    const options = {
       json: true,
       method: 'TEST',
       body: JSON.stringify({
-        name: 'world'
+        name: 'world',
       }),
       headers: {
         'X-Auth-Key': 'DEADBEEF',
-        'X-Auth-Email': 'fake@domain.email'
-      }
+        'X-Auth-Email': 'fake@domain.email',
+      },
     };
 
     td.when(getter.got(), {ignoreExtraArgs: true}).thenReject();
-    td.when(getter.got(
-      'https://api.cloudflare.com/client/v4/example/42',
-      td.matchers.contains(options)
-    )).thenResolve({body: body});
+    td
+      .when(
+        getter.got(
+          'https://api.cloudflare.com/client/v4/example/42',
+          td.matchers.contains(options)
+        )
+      )
+      .thenResolve({body});
 
-    var subject = new Client({
+    const subject = new Client({
       email: 'other@domain.email',
-      key: '5CA1AB1E'
+      key: '5CA1AB1E',
     });
 
-    var res = subject.request('TEST', 'example/42', {
-      name: 'world'
-    }, {
-      auth: {
-        email: 'fake@domain.email',
-        key: 'DEADBEEF'
+    const res = subject.request(
+      'TEST',
+      'example/42',
+      {
+        name: 'world',
       },
-      headers: {}
-    });
+      {
+        auth: {
+          email: 'fake@domain.email',
+          key: 'DEADBEEF',
+        },
+        headers: {},
+      }
+    );
 
-    return res.then(function (resp) {
-      assert.deepEqual(resp, body);
-    });
+    return res.then(resp => assert.deepEqual(resp, body));
   });
 });

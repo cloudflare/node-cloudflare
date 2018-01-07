@@ -1,97 +1,119 @@
+/*
+ * Copyright (C) 2014-present Cloudflare, Inc.
+
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ */
+
 'use strict';
-var assert = require('power-assert');
-var mocha = require('mocha');
-var prototypal = require('es-class');
-var td = require('testdouble');
 
-var describe = mocha.describe;
-var it = mocha.it;
-var beforeEach = mocha.beforeEach;
-var afterEach = mocha.afterEach;
+const assert = require('power-assert');
+const mocha = require('mocha');
+const prototypal = require('es-class');
+const td = require('testdouble');
 
-var Resource = require('../lib/Resource');
-var Client = require('../lib/Client');
+const describe = mocha.describe;
+const it = mocha.it;
+const beforeEach = mocha.beforeEach;
+const afterEach = mocha.afterEach;
 
-describe('Resource', function () {
-  var FakeClient;
-  beforeEach(function () {
+const Resource = require('../lib/Resource');
+const Client = require('../lib/Client');
+
+describe('Resource', () => {
+  let FakeClient;
+
+  beforeEach(done => {
     FakeClient = td.constructor(Client);
+
+    done();
   });
 
-  afterEach(function () {
+  afterEach(done => {
     td.reset();
+    done();
   });
 
-  it('creates an instance of a Resource', function () {
-    var client = new FakeClient();
-    var subject = new Resource(client);
+  it('creates an instance of a Resource', done => {
+    const client = new FakeClient();
+    const subject = new Resource(client);
 
     assert(subject instanceof Resource);
-    assert.strictEqual(subject._client, client);
+    assert.strictEqual(subject._client, client); // eslint-disable-line no-underscore-dangle
+
+    done();
   });
 
-  describe('createFullPath', function () {
-    it('returns root when unconfigured', function () {
-      var client = new FakeClient();
-      var subject = new Resource(client);
+  describe('createFullPath', () => {
+    it('returns root when unconfigured', done => {
+      const client = new FakeClient();
+      const subject = new Resource(client);
 
-      var path = subject.createFullPath();
+      const path = subject.createFullPath();
 
       assert.equal(path, '');
+
+      done();
     });
 
-    it('joins method path with resource path', function () {
-      var client = new FakeClient();
-      var subject = new Resource(client);
+    it('joins method path with resource path', done => {
+      const client = new FakeClient();
+      const subject = new Resource(client);
+
       subject.path = 'example';
 
-      var path = subject.createFullPath('foo');
+      const path = subject.createFullPath('foo');
 
       assert.equal(path, 'example/foo');
+
+      done();
     });
   });
 
-  describe('subclass', function () {
-    it('creates and instance of Resource and Klass', function () {
-      var Klass = prototypal({
-        extends: Resource
+  describe('subclass', () => {
+    it('creates and instance of Resource and Klass', done => {
+      const Klass = prototypal({
+        extends: Resource,
       });
-      var client = new FakeClient();
-      var subject = new Klass(client);
+      const client = new FakeClient();
+      const subject = new Klass(client);
 
       assert(subject instanceof Resource);
       assert(subject instanceof Klass);
-      assert.strictEqual(subject._client, client);
+      assert.strictEqual(subject._client, client); // eslint-disable-line no-underscore-dangle
+
+      done();
     });
 
-    it('joins method path with resource path', function () {
-      var Klass = prototypal({
+    it('joins method path with resource path', done => {
+      const Klass = prototypal({
         extends: Resource,
-        path: 'example'
+        path: 'example',
       });
-      var client = new FakeClient();
-      var subject = new Klass(client);
+      const client = new FakeClient();
+      const subject = new Klass(client);
 
-      var path = subject.createFullPath('foo');
+      const path = subject.createFullPath('foo');
 
       assert.equal(path, 'example/foo');
+
+      done();
     });
 
-    it('includes basic methods', function () {
-      var Klass = prototypal({
+    it('includes basic methods', done => {
+      const Klass = prototypal({
         extends: Resource,
-        includeBasic: [
-          'browse',
-          'del'
-        ]
+        includeBasic: ['browse', 'del'],
       });
-      var client = new FakeClient();
-      var subject = new Klass(client);
+      const client = new FakeClient();
+      const subject = new Klass(client);
 
       assert(Object.hasOwnProperty.call(subject, 'browse'));
       assert(typeof subject.browse === 'function');
       assert(Object.hasOwnProperty.call(subject, 'del'));
       assert(typeof subject.del === 'function');
+
+      done();
     });
   });
 });

@@ -1,186 +1,243 @@
+/*
+ * Copyright (C) 2014-present Cloudflare, Inc.
+
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ */
+
 'use strict';
-var assert = require('power-assert');
-var td = require('testdouble');
-var mocha = require('mocha');
 
-var describe = mocha.describe;
-var it = mocha.it;
-var beforeEach = mocha.beforeEach;
-var afterEach = mocha.afterEach;
+const assert = require('power-assert');
+const td = require('testdouble');
+const mocha = require('mocha');
 
-var Resource = require('../lib/Resource');
-var Client = require('../lib/Client');
-var method = require('../lib/method');
+const describe = mocha.describe;
+const it = mocha.it;
+const beforeEach = mocha.beforeEach;
+const afterEach = mocha.afterEach;
 
-describe('method', function () {
-  var FakeResource;
-  var FakeClient;
-  beforeEach(function () {
+const Resource = require('../lib/Resource');
+const Client = require('../lib/Client');
+const method = require('../lib/method');
+
+describe('method', () => {
+  let FakeResource;
+  let FakeClient;
+
+  beforeEach(done => {
     FakeClient = td.constructor(Client);
     FakeResource = td.constructor(Resource);
+
+    done();
   });
-  afterEach(function () {
+  afterEach(done => {
     td.reset();
+    done();
   });
 
-  it('should make basic request', function () {
-    var body = {
-      hello: 'world'
+  it('should make basic request', () => {
+    const body = {
+      hello: 'world',
     };
 
-    var client = new FakeClient();
-    var resource = new FakeResource();
-    resource._client = client;
+    const client = new FakeClient();
+    const resource = new FakeResource();
+
+    resource._client = client; // eslint-disable-line no-underscore-dangle
 
     td.when(resource.createFullPath(undefined)).thenReturn('/');
     td.when(client.request(), {ignoreExtraArgs: true}).thenReject();
-    td.when(client.request('GET', '/', {}, {
-      auth: {},
-      headers: {}
-    })).thenResolve(body);
+    td
+      .when(
+        client.request(
+          'GET',
+          '/',
+          {},
+          {
+            auth: {},
+            headers: {},
+          }
+        )
+      )
+      .thenResolve(body);
 
-    var subject = method({}).bind(resource);
+    const subject = method({}).bind(resource);
 
-    return subject().then(function (resp) {
-      assert.deepEqual(resp, body);
-    });
+    return subject().then(resp => assert.deepEqual(resp, body));
   });
 
-  it('should interpolate URL parameters', function () {
-    var body = {
-      hello: 'world'
+  it('should interpolate URL parameters', () => {
+    const body = {
+      hello: 'world',
     };
 
-    var client = new FakeClient();
-    var resource = new FakeResource();
-    resource._client = client;
+    const client = new FakeClient();
+    const resource = new FakeResource();
+
+    resource._client = client; // eslint-disable-line no-underscore-dangle
 
     td.when(resource.createFullPath('/:id')).thenReturn('example/:id');
     td.when(client.request(), {ignoreExtraArgs: true}).thenReject();
-    td.when(client.request('POST', 'example/42', {}, {
-      auth: {},
-      headers: {}
-    })).thenResolve(body);
+    td
+      .when(
+        client.request(
+          'POST',
+          'example/42',
+          {},
+          {
+            auth: {},
+            headers: {},
+          }
+        )
+      )
+      .thenResolve(body);
 
-    var subject = method({
+    const subject = method({
       method: 'POST',
-      path: '/:id'
+      path: '/:id',
     }).bind(resource);
 
-    return subject(42).then(function (resp) {
-      assert.deepEqual(resp, body);
-    });
+    return subject(42).then(resp => assert.deepEqual(resp, body));
   });
 
-  it('should reject when URL parameters are not provided', function () {
-    var client = new FakeClient();
-    var resource = new FakeResource();
-    resource._client = client;
+  it('should reject when URL parameters are not provided', () => {
+    const client = new FakeClient();
+    const resource = new FakeResource();
+
+    resource._client = client; // eslint-disable-line no-underscore-dangle
 
     td.when(resource.createFullPath('/:id')).thenReturn('example/:id');
     td.when(client.request(), {ignoreExtraArgs: true}).thenReject();
 
-    var subject = method({
+    const subject = method({
       method: 'POST',
-      path: '/:id'
+      path: '/:id',
     }).bind(resource);
 
-    return subject().catch(function (err) {
-      assert(err.message.match(/^Cloudflare: Argument/));
-    });
+    return subject().catch(err =>
+      assert(err.message.match(/^Cloudflare: Argument/))
+    );
   });
 
-  it('should extract data from arguments', function () {
-    var body = {
-      hello: 'world'
+  it('should extract data from arguments', () => {
+    const body = {
+      hello: 'world',
     };
-    var client = new FakeClient();
-    var resource = new FakeResource();
-    resource._client = client;
+    const client = new FakeClient();
+    const resource = new FakeResource();
+
+    resource._client = client; // eslint-disable-line no-underscore-dangle
 
     td.when(resource.createFullPath('/:id')).thenReturn('example/:id');
     td.when(client.request(), {ignoreExtraArgs: true}).thenReject();
-    td.when(client.request('POST', 'example/42', {
-      name: 'world'
-    }, {
-      auth: {},
-      headers: {}
-    })).thenResolve(body);
+    td
+      .when(
+        client.request(
+          'POST',
+          'example/42',
+          {
+            name: 'world',
+          },
+          {
+            auth: {},
+            headers: {},
+          }
+        )
+      )
+      .thenResolve(body);
 
-    var subject = method({
+    const subject = method({
       method: 'POST',
-      path: '/:id'
+      path: '/:id',
     }).bind(resource);
 
     return subject(42, {
-      name: 'world'
-    }).then(function (resp) {
-      assert.deepEqual(resp, body);
-    });
+      name: 'world',
+    }).then(resp => assert.deepEqual(resp, body));
   });
 
-  it('should extract options with no body', function () {
-    var body = {
-      hello: 'world'
+  it('should extract options with no body', () => {
+    const body = {
+      hello: 'world',
     };
 
-    var client = new FakeClient();
-    var resource = new FakeResource();
-    resource._client = client;
+    const client = new FakeClient();
+    const resource = new FakeResource();
+
+    resource._client = client; // eslint-disable-line no-underscore-dangle
 
     td.when(resource.createFullPath(undefined)).thenReturn('/');
     td.when(client.request(), {ignoreExtraArgs: true}).thenReject();
-    td.when(client.request('GET', '/', {}, {
-      auth: {
-        key: 'SCA1EAB1E',
-        email: 'other@domain.email'
-      },
-      headers: {}
-    })).thenResolve(body);
+    td
+      .when(
+        client.request(
+          'GET',
+          '/',
+          {},
+          {
+            auth: {
+              key: 'SCA1EAB1E',
+              email: 'other@domain.email',
+            },
+            headers: {},
+          }
+        )
+      )
+      .thenResolve(body);
 
-    var subject = method({}).bind(resource);
+    const subject = method({}).bind(resource);
 
     return subject({
       key: 'SCA1EAB1E',
-      email: 'other@domain.email'
-    }).then(function (resp) {
-      assert.deepEqual(resp, body);
-    });
+      email: 'other@domain.email',
+    }).then(resp => assert.deepEqual(resp, body));
   });
 
-  it('should extract options with body', function () {
-    var body = {
-      hello: 'world'
+  it('should extract options with body', () => {
+    const body = {
+      hello: 'world',
     };
 
-    var client = new FakeClient();
-    var resource = new FakeResource();
-    resource._client = client;
+    const client = new FakeClient();
+    const resource = new FakeResource();
+
+    resource._client = client; // eslint-disable-line no-underscore-dangle
 
     td.when(resource.createFullPath('/:id')).thenReturn('example/:id');
     td.when(client.request(), {ignoreExtraArgs: true}).thenReject();
-    td.when(client.request('POST', 'example/42', {
-      name: 'world'
-    }, {
-      auth: {
-        key: 'SCA1EAB1E',
-        email: 'other@domain.email'
-      },
-      headers: {}
-    })).thenResolve(body);
+    td
+      .when(
+        client.request(
+          'POST',
+          'example/42',
+          {
+            name: 'world',
+          },
+          {
+            auth: {
+              key: 'SCA1EAB1E',
+              email: 'other@domain.email',
+            },
+            headers: {},
+          }
+        )
+      )
+      .thenResolve(body);
 
-    var subject = method({
+    const subject = method({
       method: 'POST',
-      path: '/:id'
+      path: '/:id',
     }).bind(resource);
 
-    return subject(42, {
-      name: 'world'
-    }, {
-      key: 'SCA1EAB1E',
-      email: 'other@domain.email'
-    }).then(function (resp) {
-      assert.deepEqual(resp, body);
-    });
+    return subject(
+      42,
+      {
+        name: 'world',
+      },
+      {
+        key: 'SCA1EAB1E',
+        email: 'other@domain.email',
+      }
+    ).then(resp => assert.deepEqual(resp, body));
   });
 });

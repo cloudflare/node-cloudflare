@@ -1,0 +1,25 @@
+extends:
+  - es/2015/server
+  - plugin:prettier/recommended
+  - plugin:eslint-comments/recommended
+  - plugin:node/recommended
+  - plugin:security/recommended
+  - plugin:promise/recommended
+plugins:
+  - eslint-comments
+  - node
+  - security
+  - promise
+  - notice
+rules:
+  prefer-reflect: off
+  no-underscore-dangle:
+    - error
+    - allowAfterThis: true
+  prefer-rest-params: off
+  node/exports-style:
+    - error
+    - module.exports
+  notice/notice:
+    - error
+    - template: "/*\n * Copyright (C) 2014-present Cloudflare, Inc.\n\n * This software may be modified and distributed under the terms\n * of the MIT license.  See the LICENSE file for details.\n */"
