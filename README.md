@@ -51,24 +51,6 @@ async function getZoneStatus(id) {
 }
 ```
 
-### Available resources and methods
+### Documentation
 
-* dnsRecords
-    * `browse(zoneId)`
-    * `read(zoneId, dnsRecordId)`
-    * `edit(zoneId, dnsRecordId, params)`
-    * `add(zoneId, params)`
-    * `del(zoneId, dnsRecordId)`
-* ips
-    * `browse()`
-* zones
-    * `browse()`
-    * `read(zoneId)`
-    * `edit(zoneId, params)`
-    * `add(params)`
-    * `del(zoneId)`
-    * `activationCheck(zoneId)`
-    * `purgeCache(zoneId, params)`
-* user
-    * `read()`
-    * `edit(params)`
+* [Generated JSDoc](https://cloudflare.github.io/node-cloudflare)
