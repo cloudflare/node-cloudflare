@@ -11,6 +11,7 @@ const prototypal = require('es-class');
 const auto = require('autocreate');
 
 const Client = require('./lib/Client');
+const proxy = require('./lib/proxy');
 
 /* eslint-disable global-require */
 const resources = {
@@ -22,6 +23,31 @@ const resources = {
   user: require('./lib/resources/User'),
 };
 /* eslint-enable global-require */
+
+/**
+ * withEnvProxy configures an HTTPS proxy if required to reach the Cloudflare API.
+ *
+ * @private
+ * @param {Object} opts - The current Cloudflare options
+ */
+const withEnvProxy = function withEnvProxy(opts) {
+  /* eslint-disable no-process-env */
+  const httpsProxy = process.env.HTTPS_PROXY || process.env.https_proxy;
+  const noProxy = process.env.NO_PROXY || process.env.no_proxy;
+  /* eslint-enable no-process-env */
+
+  if (httpsProxy) {
+    const agent = proxy.proxyAgent(
+      httpsProxy,
+      noProxy,
+      'https://api.cloudflare.com'
+    );
+
+    if (agent) {
+      opts.agent = agent;
+    }
+  }
+};
 
 /**
  * Constructs and returns a new Cloudflare API client with the specified authentication.
@@ -41,10 +67,14 @@ const resources = {
 const Cloudflare = auto(
   prototypal({
     constructor: function constructor(auth) {
-      const client = new Client({
+      const opts = {
         email: auth && auth.email,
         key: auth && auth.key,
-      });
+      };
+
+      withEnvProxy(opts);
+
+      const client = new Client(opts);
 
       Object.defineProperty(this, '_client', {
         value: client,
