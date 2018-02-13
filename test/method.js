@@ -76,7 +76,7 @@ describe('method', () => {
 
     resource._client = client; // eslint-disable-line no-underscore-dangle
 
-    td.when(resource.createFullPath('/:id')).thenReturn('example/:id');
+    td.when(resource.createFullPath(':id')).thenReturn('example/:id');
     td.when(client.request(), {ignoreExtraArgs: true}).thenReject();
     td
       .when(
@@ -94,7 +94,7 @@ describe('method', () => {
 
     const subject = method({
       method: 'POST',
-      path: '/:id',
+      path: ':id',
     }).bind(resource);
 
     return subject(42).then(resp => assert.deepEqual(resp, body));
@@ -106,12 +106,12 @@ describe('method', () => {
 
     resource._client = client; // eslint-disable-line no-underscore-dangle
 
-    td.when(resource.createFullPath('/:id')).thenReturn('example/:id');
+    td.when(resource.createFullPath(':id')).thenReturn('example/:id');
     td.when(client.request(), {ignoreExtraArgs: true}).thenReject();
 
     const subject = method({
       method: 'POST',
-      path: '/:id',
+      path: ':id',
     }).bind(resource);
 
     return subject().catch(err =>
@@ -128,7 +128,7 @@ describe('method', () => {
 
     resource._client = client; // eslint-disable-line no-underscore-dangle
 
-    td.when(resource.createFullPath('/:id')).thenReturn('example/:id');
+    td.when(resource.createFullPath(':id')).thenReturn('example/:id');
     td.when(client.request(), {ignoreExtraArgs: true}).thenReject();
     td
       .when(
@@ -148,7 +148,7 @@ describe('method', () => {
 
     const subject = method({
       method: 'POST',
-      path: '/:id',
+      path: ':id',
     }).bind(resource);
 
     return subject(42, {
@@ -203,7 +203,7 @@ describe('method', () => {
 
     resource._client = client; // eslint-disable-line no-underscore-dangle
 
-    td.when(resource.createFullPath('/:id')).thenReturn('example/:id');
+    td.when(resource.createFullPath(':id')).thenReturn('example/:id');
     td.when(client.request(), {ignoreExtraArgs: true}).thenReject();
     td
       .when(
@@ -226,7 +226,7 @@ describe('method', () => {
 
     const subject = method({
       method: 'POST',
-      path: '/:id',
+      path: ':id',
     }).bind(resource);
 
     return subject(
