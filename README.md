@@ -1,11 +1,11 @@
 # Cloudflare Node.js bindings
 
-[![Stability Stable][badge-stability]](badge-stability-url)
-[![NPM version][badge-npm]](badge-npm-url)
-[![Travis CI][badge-travis]](badge-travis-url)
-[![Coveralls][badge-coveralls]](badge-coveralls-url)
-[![NPM downloads][badge-npm-downloads]](badge-npm-downloads)
-[![Libraries.io Dependencies][badge-libraries]](badge-libraries-url)
+[![Stability Stable][badge-stability]][badge-stability-url]
+[![NPM version][badge-npm]][badge-npm-url]
+[![Travis CI][badge-travis]][badge-travis-url]
+[![Coveralls][badge-coveralls]][badge-coveralls-url]
+[![NPM downloads][badge-npm-downloads]][badge-npm-downloads]
+[![Libraries.io Dependencies][badge-libraries]][badge-libraries-url]
 
 [Cloudflare v4 API][cf-api] bindings for Node.js, providing a sourdough
 "BREAD" (Browse, Read, Edit, Add, and Delete) interface.
