@@ -57,7 +57,7 @@ describe('method', () => {
             auth: {},
             headers: {},
             json: true,
-            contentType: undefined,
+            contentType: 'application/json',
           }
         )
       )
@@ -90,7 +90,7 @@ describe('method', () => {
             auth: {},
             headers: {},
             json: true,
-            contentType: undefined,
+            contentType: 'application/json',
           }
         )
       )
@@ -146,7 +146,7 @@ describe('method', () => {
             auth: {},
             headers: {},
             json: true,
-            contentType: undefined,
+            contentType: 'application/json',
           }
         )
       )
@@ -187,7 +187,7 @@ describe('method', () => {
             },
             headers: {},
             json: true,
-            contentType: undefined,
+            contentType: 'application/json',
           }
         )
       )
@@ -228,7 +228,7 @@ describe('method', () => {
             },
             headers: {},
             json: true,
-            contentType: undefined,
+            contentType: 'application/json',
           }
         )
       )
@@ -273,7 +273,7 @@ describe('method', () => {
             auth: {},
             headers: {},
             json: false,
-            contentType: undefined,
+            contentType: 'application/json',
           }
         )
       )
@@ -281,6 +281,41 @@ describe('method', () => {
 
     const subject = method({
       json: false,
+    }).bind(resource);
+
+    return subject().then(resp => assert.deepEqual(resp, body));
+  });
+
+  it('should set content-type when specified', () => {
+    const body = {
+      hello: 'world',
+    };
+
+    const client = new FakeClient();
+    const resource = new FakeResource();
+
+    resource._client = client; // eslint-disable-line no-underscore-dangle
+
+    td.when(resource.createFullPath(undefined)).thenReturn('/');
+    td.when(client.request(), {ignoreExtraArgs: true}).thenReject();
+    td
+      .when(
+        client.request(
+          'GET',
+          '/',
+          {},
+          {
+            auth: {},
+            headers: {},
+            json: true,
+            contentType: 'application/javascript',
+          }
+        )
+      )
+      .thenResolve(body);
+
+    const subject = method({
+      contentType: 'application/javascript',
     }).bind(resource);
 
     return subject().then(resp => assert.deepEqual(resp, body));
