@@ -20,6 +20,11 @@ const resources = {
   zones: require('./lib/resources/Zones'),
   zoneSettings: require('./lib/resources/ZoneSettings'),
   zoneCustomHostNames: require('./lib/resources/ZoneCustomHostNames'),
+  zoneWorkers: require('./lib/resources/ZoneWorkers'),
+  zoneWorkersScript: require('./lib/resources/ZoneWorkersScript'),
+  zoneWorkersRoutes: require('./lib/resources/ZoneWorkersRoutes'),
+  enterpriseZoneWorkersScripts: require('./lib/resources/EnterpriseZoneWorkersScripts'),
+  enterpriseZoneWorkersRoutes: require('./lib/resources/EnterpriseZoneWorkersRoutes'),
   user: require('./lib/resources/User'),
 };
 /* eslint-enable global-require */
