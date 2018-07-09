@@ -255,12 +255,12 @@ describe('method', () => {
     const body = {
       hello: 'world',
     };
-  
+
     const client = new FakeClient();
     const resource = new FakeResource();
-  
+
     resource._client = client; // eslint-disable-line no-underscore-dangle
-  
+
     td.when(resource.createFullPath(undefined)).thenReturn('/');
     td.when(client.request(), {ignoreExtraArgs: true}).thenReject();
     td
@@ -278,11 +278,11 @@ describe('method', () => {
         )
       )
       .thenResolve(body);
-  
+
     const subject = method({
       json: false,
     }).bind(resource);
-  
+
     return subject().then(resp => assert.deepEqual(resp, body));
   });
 });
