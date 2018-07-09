@@ -2,8 +2,6 @@ language: node_js
 dist: trusty
 sudo: false
 
-before_install:
-  - npm install -g npm@latest
 notifications:
   email: false
 
@@ -14,19 +12,29 @@ test_stage: &test_stage
 jobs:
   include:
     - stage: lint
+      before_install:
+        - npm install -g npm@latest
       node_js: 8
       script:
         - npm run lint
     - stage: test
+      before_install:
+        - npm install -g npm@5.8.0
       <<: *test_stage
       node_js: 4
     - stage: test
+      before_install:
+        - npm install -g npm@latest
       <<: *test_stage
       node_js: 6
     - stage: test
+      before_install:
+        - npm install -g npm@latest
       <<: *test_stage
       node_js: 8
     - stage: release
+      before_install:
+        - npm install -g npm@latest
       node_js: 8
       script: skip
       deploy:
@@ -38,6 +46,8 @@ jobs:
           on:
             tags: true
     - stage: release
+      before_install:
+        - npm install -g npm@latest
       node_js: 8
       script:
         - npm install -g documentation@^5.3.5
