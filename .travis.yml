@@ -18,6 +18,8 @@ jobs:
       script:
         - npm run lint
     - stage: test
+      before_install:
+        - npm install -g npm@5.8.0
       <<: *test_stage
       node_js: 6
     - stage: test
