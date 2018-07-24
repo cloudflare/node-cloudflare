@@ -14,26 +14,26 @@ test_stage: &test_stage
 jobs:
   include:
     - stage: lint
-      node_js: 8
+      node_js: 10
       script:
         - npm run lint
-    - stage: test
-      <<: *test_stage
-      node_js: 4
     - stage: test
       <<: *test_stage
       node_js: 6
     - stage: test
       <<: *test_stage
       node_js: 8
+    - stage: test
+      <<: *test_stage
+      node_js: 10
     - stage: release
-      node_js: 8
+      node_js: 10
       script: skip
       deploy:
         - provider: npm
           email: terinjokes@gmail.com
           api_key:
-            secure: Y8SHFjYJoPzwxt9MIiP+FkLz8Gy8Qc6HGEJtaVfoeKzGk4dQcT2PHQmiZ0mNHhmueVa96UCClJJBOx0k7J4wl5D/ABB3hh3+YPbnbFaD/uIvVEuYcXgFrzVox9u9M/CzOWVHUinRe+m7HSsEn6LPgwPb5EWQo0eGzRMGKooe5n7X1JDjFrSL0ERGAY4zTxl5iwKUQvfaYjOqJ1YUkhjqu01d4FHMXHaxgjJE5CpduvTHjQisMiSQIrNmiKWuHKNgkRDGWJnClpatfWUXOnFUFEMY5yGQ5RZkOesZ5JqSSAj7JgRNH7M0gMF3um6k+h2xM1w4W6XcAoF0FnBuh6X91fKR+F83VMA/skdmf4z/OtL2KbZsuIYiSTbsPyNb9ysChhicICD8fjZ20Z/nXXTgpf5X2lXSPY6gysdJ2V4Y1e5VEq4yaLFH/HV/mZPcjpfCFnGbAx9Urg51pB0dAzhPG6ZfkKATDnhnQJhvE5WFgeRNC5AS+oV6xoAqRwtTw0rSsfHfZGVjuQkH+TXuqdIB5JqrHRt00BYO/YbMJwMmtJMOdPzQkmUAT1R136c8Rfi3UjD/70Lpnp5DuYEu4H+gApjJDSbIsYNJAPmzdumniHi1KKpmbV1EUC4mfNA1tcvUX8Sc9MRP6aaRspQN9B7PxR1936iC9bQEN5HgIgmr2qg=
+            secure: v38GBBoojaq8VigHC9BOZTGBZV4T8exrNRwrSYwpfedGesCDrnRYRXGXlNxqU8xI68RtNq00KlxPV3k3rSP3ZCboyl92g3sqwqCND0Z1hGGQqZxnP477Kwo+IOm3/p6uUwj0L3xesDc2p7vhNgNXHZG1GPcebpaVOhZtARR7AubeWbtNakG8iQJV8FyL9f0nx6M1RNNYqftxz+ibxRJYzpFFn1XIx0aznbtn82LcCODdbkqcZnopkirayV7XNI1Pt+wsI1PoHXppEyZJdnWPLJKdifoDKaCu6cVYUSTOXDd/2SFDZzQW/rqlbhBF/H4CPtoo/HdRslx+dsYxvTkF+RTrj0ec+nazOH1HSmqNWTHNWEE+vuDjm9w27Eus1iRpZRc6mbrvwD2uFEIjr7k2BUJanx+g3dvVy0ePLy5tIuEk1Fxvx7keq4oE1h9NAEbL1cSqmqOYusU67NAON8i+krRP+AOFfoGm5V+wkVqHmr61CIz191JUQwhAusc0B9IEmpYaP737niianqFU8VpiQ0kjJuK2HOx9q3Dj4WSH8tzjsUHTL8jJDruLuF2skC2IIQ+Ud8aXRvtCdLv4YGlBiXXAyPvyl/VCFGD0Ob2aAOnM8IyeupqKVPJmLr1LaG/YX0Xrk+VRqN8IwPJoxevAwZsMF7j7ghOr2PL7xZElT9k=
           skip_cleanup: true
           on:
             tags: true
