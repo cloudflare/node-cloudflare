@@ -179,6 +179,55 @@ describe('HTTP Client', () => {
     return res.then(resp => assert.deepEqual(resp, body));
   });
 
+  it('should support API Tokens', () => {
+    const getter = new FakeGetter();
+    const token = 'vr29SNZEpswxdp';
+    const body = {
+      hello: 'world',
+    };
+
+    const options = {
+      json: true,
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      query: {
+        name: 'world',
+      },
+    };
+
+    td.when(getter.got(), {ignoreExtraArgs: true}).thenReject();
+    td
+      .when(
+        getter.got(
+          'https://api.cloudflare.com/client/v4/example/42',
+          td.matchers.contains(options)
+        )
+      )
+      .thenResolve({body});
+
+    const subject = new Client({
+      token,
+    });
+
+    const res = subject.request(
+      'GET',
+      'example/42',
+      {
+        name: 'world',
+      },
+      {
+        auth: {},
+        headers: {},
+      }
+    );
+
+    return res.then(resp => assert.deepEqual(resp, body));
+  });
+
   it('should override authentication', () => {
     const getter = new FakeGetter();
     const body = {
