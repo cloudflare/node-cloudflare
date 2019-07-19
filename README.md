@@ -45,6 +45,17 @@ var cf = require('cloudflare')({
 });
 ```
 
+### API Tokens (BETA)
+Create your token on the [My Profile -> API Tokens][api-tokens] page in the Cloudflare dashboard.
+
+[api-tokens]: https://dash.cloudflare.com/profile/api-tokens
+
+```javascript
+var cf = require('cloudflare')({
+  token: 'your Cloudflare API token'
+});
+```
+
 ## API Overview
 
 Every resource is accessed via your `cf` instance:
