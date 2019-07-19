@@ -190,7 +190,7 @@ describe('HTTP Client', () => {
       json: true,
       method: 'GET',
       headers: {
-        'Authorization': `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
         Accept: 'application/json',
       },
@@ -210,7 +210,7 @@ describe('HTTP Client', () => {
       .thenResolve({body});
 
     const subject = new Client({
-      token
+      token,
     });
 
     const res = subject.request(
