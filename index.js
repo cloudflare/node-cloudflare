@@ -60,7 +60,8 @@ const withEnvProxy = function withEnvProxy(opts) {
  * @class Cloudflare
  * @param {Object} auth - The API authentication for an account
  * @param {string} auth.email - The account email address
- * @param {string} auth.key - The account API token key
+ * @param {string} auth.key - The account API key
+ * @param {string} auth.token - The account API token
  *
  * @property {DNSRecords} dnsRecords - DNS Records instance
  * @property {IPs} ips - IPs instance
