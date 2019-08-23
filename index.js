@@ -18,6 +18,8 @@ const resources = {
   dnsRecords: require('./lib/resources/DNSRecords'),
   enterpriseZoneWorkersScripts: require('./lib/resources/EnterpriseZoneWorkersScripts'),
   enterpriseZoneWorkersRoutes: require('./lib/resources/EnterpriseZoneWorkersRoutes'),
+  enterpriseZoneWorkersKVNamespaces: require('./lib/resources/EnterpriseZoneWorkersKVNamespaces'),
+  enterpriseZoneWorkersKV: require('./lib/resources/EnterpriseZoneWorkersKV'),
   ips: require('./lib/resources/IPs'),
   zones: require('./lib/resources/Zones'),
   zoneSettings: require('./lib/resources/ZoneSettings'),
