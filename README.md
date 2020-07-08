@@ -34,6 +34,7 @@ Node.js v4 and greater are supported.
 ## Configuration
 
 ### API Keys
+
 Set your account email address and API key.  The API key can be found on
 the [My Profile -> API Tokens][api-tokens] page in the Cloudflare dashboard.
 
@@ -47,6 +48,7 @@ var cf = require('cloudflare')({
 ```
 
 ### API Tokens (BETA)
+
 Create your token on the [My Profile -> API Tokens][api-tokens] page in the Cloudflare dashboard.
 
 [api-tokens]: https://dash.cloudflare.com/profile/api-tokens
