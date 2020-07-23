@@ -15,19 +15,32 @@ const proxy = require('./lib/proxy');
 
 /* eslint-disable global-require */
 const resources = {
+  accounts: require('./lib/resources/Accounts.js'),
+  accountAccessFirewall: require('./lib/resources/AccountAccessFirewall.js'),
+  accountMembers: require('./lib/resources/AccountMembers.js'),
+  accountRoles: require('./lib/resources/AccountRoles.js'),
+  accountSubscriptions: require('./lib/resources/AccountSubscriptions.js'),
+  dnsAnalytics: require('./lib/resources/DNSAnalytics.js'),
   dnsRecords: require('./lib/resources/DNSRecords'),
   enterpriseZoneWorkersScripts: require('./lib/resources/EnterpriseZoneWorkersScripts'),
   enterpriseZoneWorkersRoutes: require('./lib/resources/EnterpriseZoneWorkersRoutes'),
   enterpriseZoneWorkersKVNamespaces: require('./lib/resources/EnterpriseZoneWorkersKVNamespaces'),
   enterpriseZoneWorkersKV: require('./lib/resources/EnterpriseZoneWorkersKV'),
   ips: require('./lib/resources/IPs'),
+  user: require('./lib/resources/User'),
+  userAccessFirewall: require('./lib/resources/UserAccessFirewall.js'),
+  userAccountMemberships: require('./lib/resources/UserAccountMemberships.js'),
+  userInvites: require('./lib/resources/UserInvites.js'),
+  userSubscriptions: require('./lib/resources/UserSubscriptions.js'),
   zones: require('./lib/resources/Zones'),
+  zoneAccessFirewall: require('./lib/resources/ZoneAccessFirewall.js'),
+  zoneAnalytics: require('./lib/resources/ZoneAnalytics.js'),
+  zoneSubscription: require('./lib/resources/ZoneSubscription.js'),
   zoneSettings: require('./lib/resources/ZoneSettings'),
   zoneCustomHostNames: require('./lib/resources/ZoneCustomHostNames'),
   zoneWorkers: require('./lib/resources/ZoneWorkers'),
   zoneWorkersScript: require('./lib/resources/ZoneWorkersScript'),
   zoneWorkersRoutes: require('./lib/resources/ZoneWorkersRoutes'),
-  user: require('./lib/resources/User'),
 };
 /* eslint-enable global-require */
 
