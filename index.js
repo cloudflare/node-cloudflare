@@ -25,6 +25,7 @@ const resources = {
   zones: require('./lib/resources/Zones'),
   zoneSettings: require('./lib/resources/ZoneSettings'),
   zoneCustomHostNames: require('./lib/resources/ZoneCustomHostNames'),
+  zoneCustomHostNamesFallbackOrigin: require('./lib/resources/ZoneCustomHostNamesFallbackOrigin'),
   zoneWorkers: require('./lib/resources/ZoneWorkers'),
   zoneWorkersScript: require('./lib/resources/ZoneWorkersScript'),
   zoneWorkersRoutes: require('./lib/resources/ZoneWorkersRoutes'),
