@@ -177,6 +177,7 @@ declare namespace Cloudflare {
         tags?: string[];
         hosts?: string[];
         prefixes?: string[];
+        purge_everything?: boolean;
       },
     ): ResponseObjectPromise;
     browse(): ResponseObjectPromise;
