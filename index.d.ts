@@ -104,9 +104,10 @@ declare namespace Cloudflare {
 
   interface PageRules {
     edit(
+      zone_id: string, 
       id: string,
       page_rule: {
-        tragets: [
+        targets: [
           {
             target: string;
             constraint: {
@@ -125,8 +126,8 @@ declare namespace Cloudflare {
         status?: string;
       },
     ): ResponseObjectPromise;
-    add(zone: {
-      tragets: [
+    add(zone_id: string, zone: {
+      targets: [
         {
           target: string;
           constraint: {
@@ -144,9 +145,9 @@ declare namespace Cloudflare {
       priority?: number;
       status?: string;
     }): ResponseObjectPromise;
-    del(id: string): ResponseObjectPromise;
-    browse(): ResponseObjectPromise;
-    read(id: string): ResponseObjectPromise;
+    del(zone_id: string, id: string): ResponseObjectPromise;
+    browse(zone_id: string): ResponseObjectPromise;
+    read(zone_id: string, id: string): ResponseObjectPromise;
   }
 
   interface Zones {
@@ -283,6 +284,7 @@ declare class Cloudflare {
   enterpriseZoneWorkersKVNamespaces: Cloudflare.EnterpriseZoneWorkersKVNamespaces;
   enterpriseZoneWorkersKV: Cloudflare.EnterpriseZoneWorkersKV;
   ips: Cloudflare.CFIPs;
+  pageRules: Cloudflare.PageRules;
   zones: Cloudflare.Zones;
   zoneSettings: Cloudflare.ZoneSettings;
   zoneCustomHostNames: Cloudflare.ZoneCustomHostNames;
