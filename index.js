@@ -29,8 +29,9 @@ const resources = {
   zoneWorkersScript: require('./lib/resources/ZoneWorkersScript'),
   zoneWorkersRoutes: require('./lib/resources/ZoneWorkersRoutes'),
   user: require('./lib/resources/User'),
-  userToken: require('./lib/resources/UserToken'),
+  userTokens: require('./lib/resources/UserTokens'),
   stream: require('./lib/resources/Stream'),
+  tunnels: require('./lib/resources/Tunnels')
 };
 /* eslint-enable global-require */
 
