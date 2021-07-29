@@ -15,6 +15,7 @@ const proxy = require('./lib/proxy');
 
 /* eslint-disable global-require */
 const resources = {
+  argoTunnels: require('./lib/resources/ArgoTunnels'),
   dnsRecords: require('./lib/resources/DNSRecords'),
   enterpriseZoneWorkersScripts: require('./lib/resources/EnterpriseZoneWorkersScripts'),
   enterpriseZoneWorkersRoutes: require('./lib/resources/EnterpriseZoneWorkersRoutes'),
