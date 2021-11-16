@@ -16,12 +16,14 @@ const proxy = require('./lib/proxy');
 /* eslint-disable global-require */
 const resources = {
   accountAccessFirewall: require('./lib/resources/AccountAccessFirewall.js'),
+  argoTunnels: require('./lib/resources/ArgoTunnels'),
   dnsRecords: require('./lib/resources/DNSRecords'),
   enterpriseZoneWorkersScripts: require('./lib/resources/EnterpriseZoneWorkersScripts'),
   enterpriseZoneWorkersRoutes: require('./lib/resources/EnterpriseZoneWorkersRoutes'),
   enterpriseZoneWorkersKVNamespaces: require('./lib/resources/EnterpriseZoneWorkersKVNamespaces'),
   enterpriseZoneWorkersKV: require('./lib/resources/EnterpriseZoneWorkersKV'),
   ips: require('./lib/resources/IPs'),
+  pageRules: require('./lib/resources/PageRules'),
   zones: require('./lib/resources/Zones'),
   zoneSettings: require('./lib/resources/ZoneSettings'),
   zoneCustomHostNames: require('./lib/resources/ZoneCustomHostNames'),
@@ -29,6 +31,8 @@ const resources = {
   zoneWorkersScript: require('./lib/resources/ZoneWorkersScript'),
   zoneWorkersRoutes: require('./lib/resources/ZoneWorkersRoutes'),
   user: require('./lib/resources/User'),
+  userTokens: require('./lib/resources/UserTokens'),
+  stream: require('./lib/resources/Stream'),
 };
 /* eslint-enable global-require */
 
@@ -68,6 +72,7 @@ const withEnvProxy = function withEnvProxy(opts) {
  *
  * @property {DNSRecords} dnsRecords - DNS Records instance
  * @property {IPs} ips - IPs instance
+ * @property {PageRules} pageRules - Page Rules instance
  * @property {Zones} zones - Zones instance
  * @property {ZoneSettings} zoneSettings - Zone Settings instance
  * @property {ZoneCustomHostNames} zoneCustomHostNames - Zone Custom Host Names instance
