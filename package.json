@@ -9,7 +9,7 @@
   "dependencies": {
     "autocreate": "^1.1.0",
     "es-class": "^2.1.1",
-    "got": "^6.3.0",
+    "got": "^11.8.5",
     "https-proxy-agent": "^5.0.0",
     "object-assign": "^4.1.0",
     "should-proxy": "^1.0.4",
