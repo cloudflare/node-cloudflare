@@ -21,6 +21,7 @@ const resources = {
   enterpriseZoneWorkersRoutes: require('./lib/resources/EnterpriseZoneWorkersRoutes'),
   enterpriseZoneWorkersKVNamespaces: require('./lib/resources/EnterpriseZoneWorkersKVNamespaces'),
   enterpriseZoneWorkersKV: require('./lib/resources/EnterpriseZoneWorkersKV'),
+  images: require('./lib/resources/Image'),
   ips: require('./lib/resources/IPs'),
   pageRules: require('./lib/resources/PageRules'),
   zones: require('./lib/resources/Zones'),
