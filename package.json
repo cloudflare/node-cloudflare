@@ -16,7 +16,7 @@
     "url-pattern": "^1.0.3"
   },
   "devDependencies": {
-    "coveralls": "^2.13.1",
+    "coveralls": "^3.1.1",
     "eslint": "^4.15.0",
     "eslint-config-es": "^0.8.12",
     "eslint-config-prettier": "^2.9.0",
@@ -28,8 +28,8 @@
     "eslint-plugin-promise": "^3.6.0",
     "eslint-plugin-security": "^1.4.0",
     "intelli-espower-loader": "^1.0.1",
-    "mocha": "^3.4.2",
-    "nyc": "^10.3.2",
+    "mocha": "^10.2.0",
+    "nyc": "^15.1.0",
     "power-assert": "^1.4.4",
     "prettier": "^1.9.2",
     "testdouble": "^3.1.1"
