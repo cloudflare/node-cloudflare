@@ -28,7 +28,7 @@
     "eslint-plugin-promise": "^3.6.0",
     "eslint-plugin-security": "^1.4.0",
     "intelli-espower-loader": "^1.0.1",
-    "mocha": "^3.4.2",
+    "mocha": "^10.2.0",
     "nyc": "^10.3.2",
     "power-assert": "^1.4.4",
     "prettier": "^1.9.2",
