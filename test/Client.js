@@ -90,7 +90,6 @@ describe('HTTP Client', () => {
       hello: 'world',
     };
     const options = {
-      json: true,
       timeout: 42,
       retries: 1337,
       method: 'TEST',
@@ -234,7 +233,6 @@ describe('HTTP Client', () => {
       hello: 'world',
     };
     const options = {
-      json: true,
       method: 'TEST',
       body: JSON.stringify({
         name: 'world',
